@@ -272,8 +272,12 @@ void NRF::RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width){
 //retorna 1 se o NRF24 recebeu alguma coisa, retorna 0 se ainda não recebeu nada
 uint8_t NRF::DATA_READY(void){
 	uint8_t rx_empty;
+	//passa aqui
 	R_REGISTER(0x17,1,&rx_empty);
+	STM_EVAL_LEDOn(LED5);
+	//não passa aqui
 	Delay_ms(1);
+	//não passa aqui
 	rx_empty &= RX_EMPTY_MASK;
 
 	//TODO: contornar o problema de não conseguir resetar flag RX_DR
@@ -322,19 +326,31 @@ uint8_t NRF::SEND(uint8_t* data, uint8_t size){
 	return TRANSMITTED();
 }
 
+void NRF::start_listen(){
+	ASSERT_CE(SET);
+	return;
+}
+
+void NRF::stop_listen(){
+	ASSERT_CE(RESET);
+	return;
+}
+
 //data: ponteiro para os bytes a serem transmitidos; size: número de bytes a enviar
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::RECEIVE(uint8_t* data){
-	ASSERT_CE(SET);
+	//start_listen();//TODO: SHOULD I REMOVE THIS?
+	//passa aqui
 
 	while(!DATA_READY()){
+		//não chega aqui
 		STM_EVAL_LEDToggle(LED3);//TODO REMOVER APÓS DEBUG
 		Delay_ms(250);//TODO REMOVER APÓS DEBUG
 	}
 
 	//espera até receber algo
 
-	ASSERT_CE(RESET);
+	stop_listen();//TODO: SHOULD I REMOVE THIS?
 	READ_RX_FIFO(data);
 
 	return 1;
@@ -353,6 +369,17 @@ void NRF::READ_RX_FIFO(uint8_t* pointer){
 	Delay_ms(1);
 
 	CMD(0x61,payload_length,0x00,pointer);//comando R_RX_PLD
+	Delay_ms(1);
+
+	//TODO: importar modificação para o RX_unif_functions
+	//reseta a flag RX_DR para que IRQ possa subir de novo
+	uint8_t status;
+	R_REGISTER(0x07,1,&status);
+	Delay_ms(1);
+
+	status |= RX_DR_MASK;
+	W_REGISTER(0x07,1,&status);//Write 1 to clear RX_DR bit.
+
 	Delay_ms(1);
 	return;
 }

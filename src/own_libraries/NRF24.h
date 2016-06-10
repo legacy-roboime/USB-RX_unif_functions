@@ -168,6 +168,8 @@ public:
 	void begin();
 	uint16_t IRQ_Pin(){return NRF_IRQ_Pin;};
 	GPIO_TypeDef* IRQ_GPIO(){return NRF_IRQ_GPIO;};
+	void start_listen();
+	void stop_listen();
 	uint8_t RECEIVE(uint8_t* data);
 	uint8_t SEND(uint8_t* data, uint8_t size = 5);
 	void RX_configure(config_Struct* pointer);

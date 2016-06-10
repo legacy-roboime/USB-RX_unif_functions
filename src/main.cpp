@@ -73,6 +73,7 @@ int main(void)
 
   NRF radio;//inicializa o NRF com os pinos default, deixa em POWER_UP
   radio.RX_configure();
+  radio.start_listen();
 
   //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
@@ -85,6 +86,8 @@ int main(void)
 
 uint8_t USB_receive_and_put(NRF* radio_ptr){
 	static uint8_t data[]={0,0,0,0,0};
+	//passa por aqui
+
 	if(radio_ptr->RECEIVE(data)){
 		VCP_send_buffer(data,5);
 		return 1;
@@ -130,13 +133,14 @@ void EXTI4_IRQHandler(NRF* radio_ptr){
 }
 
 void EXTI9_5_IRQHandler(NRF* radio_ptr){
-	STM_EVAL_LEDToggle(LED5);
+	//passa por aqui
 	USB_receive_and_put(radio_ptr);
+	//NÃO passa por aqui
 	//contém 1 na posição correspondente às linhas que têm IT para tratar
 	EXTI_ClearITPendingBit(EXTI_Line(radio_ptr->IRQ_Pin()));
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	Delay_ms(100);//TODO; remover
-	STM_EVAL_LEDToggle(LED5);
+//	STM_EVAL_LEDToggle(LED5);
 	return;
 }
 
