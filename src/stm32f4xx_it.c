@@ -61,6 +61,7 @@ void NMI_Handler(void)
   */
 void HardFault_Handler(void)
 {
+	//uint8_t hfsr=SCB->HFSR;
   /* Go to infinite loop when Hard Fault exception occurs */
   while (1)
   {
