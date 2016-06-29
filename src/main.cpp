@@ -36,7 +36,7 @@ extern "C" {
  void EXTI2_IRQHandler(NRF* radio_ptr);
  void EXTI3_IRQHandler(NRF* radio_ptr);
  void EXTI4_IRQHandler(NRF* radio_ptr);
- void EXTI9_5_IRQHandler(NRF* radio_ptr);
+ void EXTI9_5_IRQHandler();
  void EXTI15_10_IRQHandler(NRF* radio_ptr);
 }
 
@@ -52,6 +52,8 @@ __ALIGN_BEGIN USB_OTG_CORE_HANDLE  USB_OTG_dev __ALIGN_END;
 */
 
 uint8_t USB_receive_and_put(NRF* radio_ptr);
+
+NRF* radio_int;
 
 int main(void)
 {
@@ -72,15 +74,21 @@ int main(void)
   STM_EVAL_LEDInit(LED6);
 
   NRF radio;//inicializa o NRF com os pinos default, deixa em POWER_UP
+  radio_int=&radio;
   radio.RX_configure();
   radio.start_listen();
 
   //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
+	USB_receive_and_put(0); //radio_int);
 
   /* Infinite loop */
   while (1)
   {
+	  if(!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5))
+		  STM_EVAL_LEDOn(LED3);
+	  else
+		  STM_EVAL_LEDOff(LED3);
   }
 }
 
@@ -132,14 +140,13 @@ void EXTI4_IRQHandler(NRF* radio_ptr){
 	return;
 }
 
-void EXTI9_5_IRQHandler(NRF* radio_ptr){
+void EXTI9_5_IRQHandler(){
 	//passa por aqui
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put(radio_int);
 	//NÃO passa por aqui
 	//contém 1 na posição correspondente às linhas que têm IT para tratar
-	EXTI_ClearITPendingBit(EXTI_Line(radio_ptr->IRQ_Pin()));
+	EXTI_ClearITPendingBit(EXTI_Line(radio_int->IRQ_Pin()));
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
-	Delay_ms(100);//TODO; remover
 //	STM_EVAL_LEDToggle(LED5);
 	return;
 }

@@ -120,6 +120,9 @@ void NRF::begin(){
 	config = 0b00000010;
 	//grava o novo valor de CONFIG
 	W_REGISTER(0x00,1,&config);
+	config = 0x70;
+	W_REGISTER(0x07,1,&config);
+
 	Delay_ms(2);//tempo de startup
 
 	return;
@@ -271,12 +274,11 @@ void NRF::RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width){
 
 //retorna 1 se o NRF24 recebeu alguma coisa, retorna 0 se ainda não recebeu nada
 uint8_t NRF::DATA_READY(void){
-	uint8_t rx_empty;
+	uint8_t rx_empty=0;
 	//passa aqui
+	//NOP();
 	R_REGISTER(0x17,1,&rx_empty);
 	STM_EVAL_LEDOn(LED5);
-	//não passa aqui
-	Delay_ms(1);
 	//não passa aqui
 	rx_empty &= RX_EMPTY_MASK;
 
