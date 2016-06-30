@@ -39,24 +39,21 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	 * configura como input, habilita a interrupção,
 	 * conecta ao EXTI
 	 */
+
 	//enables the SYSCFG clock
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
 
 	GPIO_Clock_Cmd(NRF_IRQ_GPIO,ENABLE);
 	GPIO_InitTypeDef GPIO_IRQ_initstruct;
-	GPIO_IRQ_initstruct.GPIO_Pin	= GPIO_Pin_5;
+	GPIO_IRQ_initstruct.GPIO_Pin	= NRF_IRQ_Pin;
 	GPIO_IRQ_initstruct.GPIO_Mode	= GPIO_Mode_IN;
 	GPIO_IRQ_initstruct.GPIO_OType	= GPIO_OType_PP;
 	GPIO_IRQ_initstruct.GPIO_PuPd	= GPIO_PuPd_UP;
 	GPIO_IRQ_initstruct.GPIO_Speed	= GPIO_Speed_50MHz;
 	GPIO_Init(NRF_IRQ_GPIO,&GPIO_IRQ_initstruct);
 
-	NVIC_InitTypeDef NVIC_cfg;
-	NVIC_cfg.NVIC_IRQChannel					= EXTIx_IRQn(NRF_IRQ_Pin);
-	NVIC_cfg.NVIC_IRQChannelCmd					= ENABLE;
-	NVIC_cfg.NVIC_IRQChannelPreemptionPriority	= 0x0f;	//lower priority, can be preempted
-	NVIC_cfg.NVIC_IRQChannelSubPriority			= 0x0f;	//lower priority, can be preempted
-	NVIC_Init(&NVIC_cfg);
+	//TODO: experimentar configurar o EXTI antes de config o NVIC
+	//TODO: experimentar também inicializar o clock do SYSCFG depois do clock do IRQ_GPIO
 
 	EXTI_InitTypeDef EXTI_cfg;
 	EXTI_cfg.EXTI_Line		= EXTI_Line(NRF_IRQ_Pin);
@@ -64,6 +61,13 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	EXTI_cfg.EXTI_Mode		= EXTI_Mode_Interrupt;
 	EXTI_cfg.EXTI_Trigger	= EXTI_Trigger_Falling;
 	EXTI_Init(&EXTI_cfg);
+
+	NVIC_InitTypeDef NVIC_cfg;
+	NVIC_cfg.NVIC_IRQChannel					= EXTIx_IRQn(NRF_IRQ_Pin);
+	NVIC_cfg.NVIC_IRQChannelCmd					= ENABLE;
+	NVIC_cfg.NVIC_IRQChannelPreemptionPriority	= 0x0f;	//lower priority, can be preempted
+	NVIC_cfg.NVIC_IRQChannelSubPriority			= 0x0f;	//lower priority, can be preempted
+	NVIC_Init(&NVIC_cfg);
 
 	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));
 	/*TODO: FAZER O OVERRIDE DOS HANDLERS*/
