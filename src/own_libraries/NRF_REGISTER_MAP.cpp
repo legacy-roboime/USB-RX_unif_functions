@@ -12,7 +12,7 @@ void NRF_REGISTER_MAP::REFRESH(){
 	REGISTER* current_register = &(CONFIG);
 	for(i=0x00;i<=0x19;i++){
 		R_REGISTER(current_register->get_address(), current_register->get_size(),current_register->content);
-		Delay_ms(1);
+		for(int j=0;j<0xffffff;j++);
 		current_register++;
 	}
 	return;

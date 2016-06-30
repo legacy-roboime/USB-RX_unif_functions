@@ -74,7 +74,7 @@ int main(void)
   STM_EVAL_LEDInit(LED6);
 
   NRF radio;//inicializa o NRF com os pinos default, deixa em POWER_UP
-  radio_int=&radio;
+  radio_ptr=&radio;
   radio.RX_configure();
   radio.start_listen();
 
