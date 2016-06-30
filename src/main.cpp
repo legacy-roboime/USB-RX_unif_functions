@@ -80,7 +80,6 @@ int main(void)
 
   //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
-	USB_receive_and_put(0); //radio_int);
 
   /* Infinite loop */
   while (1)

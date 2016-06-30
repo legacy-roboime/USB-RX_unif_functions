@@ -146,7 +146,7 @@ int SPI::R_RX_PAYLOAD(uint8_t* pointer){// lê o RX_PAYLOAD e armazena em pointer
 
 	//cheat: o comando de activate ou o de R_RX_PL_WID podem estar falhando
 	payload_width = 5;
-	for(int j=0;j<0xffffff;j++);
+	for(int j=0;j<0xffff;j++);
 	CMD(0x61,payload_width,0x00,pointer);//comando R_RX_PLD
 
 	return 0;
@@ -167,7 +167,7 @@ void SPI::FLUSH_TX(){
 	uint8_t flushcmd = 0b11100001;
 	SPI_I2S_SendData(NRF_SPI,flushcmd);//envia o comando de limpar a TX fifo
 
-	for(int j=0;j<0xffffff;j++);//sem esse delay, o nrf24 não tem tempo para limpar a tx fifo
+	for(int j=0;j<0xffff;j++);//sem esse delay, o nrf24 não tem tempo para limpar a tx fifo
 
 	//verificar TXE conforme manual de referência
 	while(!SPI_I2S_GetFlagStatus(NRF_SPI,SPI_I2S_FLAG_TXE));

@@ -138,11 +138,11 @@ void NRF::stdbyI_to_TX(uint8_t channel){
 	uint8_t config;
 	R_REGISTER(0x00,1,&config);
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 
 	config &= 0b11111110;//makes PRIM_RX=0 (transmitter)
 	W_REGISTER(0x00,1,&config);
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 
 	RF_CH_setup(channel);//setup of frequency
 	return;
@@ -153,11 +153,11 @@ void NRF::stdbyI_to_RX(uint8_t channel){
 	R_REGISTER(0x00,1,&config);
 
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 
 	config |= 0b00000001;//makes PRIM_RX=1 (receiver)
 	W_REGISTER(0x00,1,&config);
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 
 	RF_CH_setup(channel);//setup of frequency
 	return;
@@ -170,7 +170,7 @@ void NRF::EN_AA_setup(uint8_t ENAA_Px){
 	W_REGISTER(0x01,1,&en_aa);
 
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -180,7 +180,7 @@ void NRF::EN_RXADDR_setup(uint8_t ERX_Px){
 
 	W_REGISTER(0x02,1,&en_pipes);
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -192,7 +192,7 @@ void NRF::SETUP_AW_setup(uint8_t AW){
 	W_REGISTER(0x03,1,&address_width);
 
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -204,7 +204,7 @@ void NRF::SETUP_RETR_setup(uint8_t setup_retries){
 	W_REGISTER(0x04,1,&ARconfig);
 
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -215,7 +215,7 @@ void NRF::RF_CH_setup(uint8_t channel){
 	W_REGISTER(0x05,1,&rf_ch);
 
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -226,7 +226,7 @@ void NRF::RF_SETUP_setup(uint8_t configuration){
 	W_REGISTER(0x06,1,&rf_setup);
 
 	int i;
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -241,7 +241,7 @@ void NRF::RX_ADDR_Px_setup(uint8_t RX_Pipe,uint8_t* pointer){
 		W_REGISTER(0x0a+RX_Pipe,1,pointer);
 
 		int i;
-		for (i=0;i<0xffffff;i++);
+		for (i=0;i<0xffff;i++);
 	}
 	return;
 }//WORKED!
@@ -261,7 +261,7 @@ void NRF::RX_ADDR_P0_setup(uint8_t* pointer){
 		size = 5;
 	//TODO:melhorar a portabilidade, adicionar constantes com o endereço de cada registrador
 	W_REGISTER(0x0a,size,pointer);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -280,7 +280,7 @@ void NRF::RX_ADDR_P1_setup(uint8_t* pointer){
 		size = 5;
 	//TODO:melhorar a portabilidade, adicionar constantes com o endereço de cada registrador
 	W_REGISTER(0x0b,size,pointer);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -290,7 +290,7 @@ void NRF::RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width){
 
 	//TODO:melhorar a portabilidade, adicionar constantes com o endereço de cada registrador
 	W_REGISTER(0x11+RX_Pipe,1,&pw);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 	return;
 }//WORKED!
 
@@ -307,7 +307,7 @@ uint8_t NRF::DATA_READY(void){
 	//TODO: contornar o problema de não conseguir resetar flag RX_DR
 /*	uint8_t rx_dr;
 	R_REGISTER(0x07,1,&rx_dr);
-	for (i=0;i<0xffffff;i++);
+	for (i=0;i<0xffff;i++);
 	rx_dr &= RX_DR_MASK;*/
 
 //	if(rx_dr || !rx_empty){
@@ -322,12 +322,12 @@ uint8_t NRF::DATA_READY(void){
 uint8_t NRF::TRANSMITTED(void){
 	uint8_t tx_empty;
 	R_REGISTER(0x17,1,&tx_empty);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 	tx_empty &= TX_EMPTY_MASK;
 
 	uint8_t tx_ds;
 	R_REGISTER(0x07,1,&tx_ds);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 	tx_ds &= TX_DS_MASK;
 
 	if(tx_ds || !tx_empty)
@@ -340,11 +340,11 @@ uint8_t NRF::TRANSMITTED(void){
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::SEND(uint8_t* data, uint8_t size){
 	W_TX_PAYLOAD(data,size);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 
 	//pulse on CE to start transmission
 	ASSERT_CE(SET);
-	for (int i=0;i<0xffffff;i++);//minimum pulse width = 10us
+	for (int i=0;i<0xffff;i++);//minimum pulse width = 10us
 	ASSERT_CE(RESET);
 
 	return TRANSMITTED();
@@ -390,21 +390,21 @@ void NRF::READ_RX_FIFO(uint8_t* pointer){
 	//lê o RX_PW_Px correspondente àquela pipe
 	uint8_t payload_length;
 	R_REGISTER(0x11+RX_Pipe,1,&payload_length);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 
 	CMD(0x61,payload_length,0x00,pointer);//comando R_RX_PLD
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 
 	//TODO: importar modificação para o RX_unif_functions
 	//reseta a flag RX_DR para que IRQ possa subir de novo
 	uint8_t status;
 	R_REGISTER(0x07,1,&status);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 
 	status |= RX_DR_MASK;
 	W_REGISTER(0x07,1,&status);//Write 1 to clear RX_DR bit.
 
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 	return;
 }
 
@@ -530,7 +530,7 @@ void NRF::TX_configure(config_Struct* pointer){
 //TODO: melhorar a implementação, para só escrever os registradores que realmente precisam ser configurados
 void NRF::TX_ADDR_setup(uint8_t* pointer){
 	W_REGISTER(0x10,5,pointer);
-	for (int i=0;i<0xffffff;i++);
+	for (int i=0;i<0xffff;i++);
 	return;
 }
 
@@ -540,7 +540,7 @@ void NRF::RESET_ALL_REGISTERS(){
 	REGISTER* current_register = &(CONFIG);
 	for(i=0x00;i<=0x19;i++){
 		W_REGISTER(current_register->get_address(),current_register->get_size(),current_register->content);
-		for (i=0;i<0xffffff;i++);
+		for (i=0;i<0xffff;i++);
 		current_register++;
 	}
 
