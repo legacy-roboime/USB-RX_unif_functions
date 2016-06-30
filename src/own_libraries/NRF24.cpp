@@ -300,10 +300,8 @@ void NRF::RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width){
 //retorna 1 se o NRF24 recebeu alguma coisa, retorna 0 se ainda não recebeu nada
 uint8_t NRF::DATA_READY(void){
 	uint8_t rx_empty=0;
-	//passa aqui
+
 	R_REGISTER(0x17,1,&rx_empty);
-	STM_EVAL_LEDToggle(LED5);
-	//não passa aqui
 	rx_empty &= RX_EMPTY_MASK;
 
 	//TODO: contornar o problema de não conseguir resetar flag RX_DR
