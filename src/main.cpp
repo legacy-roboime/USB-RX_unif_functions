@@ -31,13 +31,13 @@ extern "C" {
  void OTG_FS_WKUP_IRQHandler(void);
 
  //handlers que podem ser chamados
- void EXTI0_IRQHandler(NRF* radio_ptr);
- void EXTI1_IRQHandler(NRF* radio_ptr);
- void EXTI2_IRQHandler(NRF* radio_ptr);
- void EXTI3_IRQHandler(NRF* radio_ptr);
- void EXTI4_IRQHandler(NRF* radio_ptr);
+ void EXTI0_IRQHandler();
+ void EXTI1_IRQHandler();
+ void EXTI2_IRQHandler();
+ void EXTI3_IRQHandler();
+ void EXTI4_IRQHandler();
  void EXTI9_5_IRQHandler();
- void EXTI15_10_IRQHandler(NRF* radio_ptr);
+ void EXTI15_10_IRQHandler();
 }
 
 
@@ -53,7 +53,7 @@ __ALIGN_BEGIN USB_OTG_CORE_HANDLE  USB_OTG_dev __ALIGN_END;
 
 uint8_t USB_receive_and_put(NRF* radio_ptr);
 
-NRF* radio_int;
+NRF* radio_ptr;
 
 int main(void)
 {
@@ -105,35 +105,35 @@ uint8_t USB_receive_and_put(NRF* radio_ptr){
 	}
 }
 
-void EXTI0_IRQHandler(NRF* radio_ptr){
+void EXTI0_IRQHandler(){
 	USB_receive_and_put(radio_ptr);
 	EXTI_ClearITPendingBit(EXTI_Line0);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
-void EXTI1_IRQHandler(NRF* radio_ptr){
+void EXTI1_IRQHandler(){
 	USB_receive_and_put(radio_ptr);
 	EXTI_ClearITPendingBit(EXTI_Line1);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
-void EXTI2_IRQHandler(NRF* radio_ptr){
+void EXTI2_IRQHandler(){
 	USB_receive_and_put(radio_ptr);
 	EXTI_ClearITPendingBit(EXTI_Line2);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
-void EXTI3_IRQHandler(NRF* radio_ptr){
+void EXTI3_IRQHandler(){
 	USB_receive_and_put(radio_ptr);
 	EXTI_ClearITPendingBit(EXTI_Line3);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
-void EXTI4_IRQHandler(NRF* radio_ptr){
+void EXTI4_IRQHandler(){
 	USB_receive_and_put(radio_ptr);
 	EXTI_ClearITPendingBit(EXTI_Line4);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
@@ -142,16 +142,16 @@ void EXTI4_IRQHandler(NRF* radio_ptr){
 
 void EXTI9_5_IRQHandler(){
 	//passa por aqui
-	USB_receive_and_put(radio_int);
+	USB_receive_and_put(radio_ptr);
 	//NÃO passa por aqui
 	//contém 1 na posição correspondente às linhas que têm IT para tratar
-	EXTI_ClearITPendingBit(EXTI_Line(radio_int->IRQ_Pin()));
+	EXTI_ClearITPendingBit(EXTI_Line(radio_ptr->IRQ_Pin()));
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 //	STM_EVAL_LEDToggle(LED5);
 	return;
 }
 
-void EXTI15_10_IRQHandler(NRF* radio_ptr){
+void EXTI15_10_IRQHandler(){
 	USB_receive_and_put(radio_ptr);
 	//contém 1 na posição correspondente às linhas que têm IT para tratar
 	EXTI_ClearITPendingBit(EXTI_Line(radio_ptr->IRQ_Pin()));
