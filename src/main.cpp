@@ -84,10 +84,13 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5))
+	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5)){
 		  STM_EVAL_LEDOn(LED3);
+		  if(EXTI_GetITStatus(EXTI_Line5)!=RESET)
+			  STM_EVAL_LEDOn(LED5);
+	  }
 	  else
-		  STM_EVAL_LEDOff(LED4);
+		  STM_EVAL_LEDOn(LED4);
   }
 }
 
@@ -97,6 +100,10 @@ uint8_t USB_receive_and_put(NRF* radio_ptr){
 
 	if(radio_ptr->RECEIVE(data)){
 		VCP_send_buffer(data,5);
+		//TODO: testar se ainda há pacotes para ler, COMO O MANUAL MANDA
+/*		if(radio_ptr->DATA_READY()){
+			STM_EVAL_LEDOn(LED5);
+		}*/
 		return 1;
 	}
 	else{
