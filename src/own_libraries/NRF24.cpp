@@ -373,6 +373,15 @@ uint8_t NRF::RECEIVE(uint8_t* data){
 	stop_listen();//TODO: SHOULD I REMOVE THIS?
 	READ_RX_FIFO(data);
 
+	uint8_t status;
+	R_REGISTER(0x07,1,&status);
+	for (int i=0;i<0xffff;i++);
+
+	//reseta a IRQ, conforme a product specification
+	status |= RX_DR_MASK;
+	W_REGISTER(0x07,1,&status);
+	for (int i=0;i<0xffff;i++);
+
 	return 1;
 }
 
