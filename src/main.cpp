@@ -84,10 +84,10 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	  if(!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5))
+	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5))
 		  STM_EVAL_LEDOn(LED3);
 	  else
-		  STM_EVAL_LEDOff(LED3);
+		  STM_EVAL_LEDOff(LED4);
   }
 }
 
@@ -146,7 +146,6 @@ void EXTI9_5_IRQHandler(){
 	//contém 1 na posição correspondente às linhas que têm IT para tratar
 	EXTI_ClearITPendingBit(EXTI_Line(radio_ptr->IRQ_Pin()));
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
-//	STM_EVAL_LEDToggle(LED5);
 	return;
 }
 

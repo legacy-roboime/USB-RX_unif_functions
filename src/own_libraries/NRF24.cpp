@@ -113,7 +113,7 @@ void NRF::ASSERT_CE(int STATE){
 void NRF::begin(){
 	//Delay_ms(11);
 	int i;
-	for (i=0;i<0xafffff5;i++);
+	for (i=0;i<0xafff5;i++);
 
 	ASSERT_CS(SET);
 	ASSERT_CE(RESET);
@@ -126,11 +126,14 @@ void NRF::begin(){
 	config = 0b00000010;
 	//grava o novo valor de CONFIG
 	W_REGISTER(0x00,1,&config);
-	config = 0x70;
-	W_REGISTER(0x07,1,&config);
+	for (i=0;i<0xffff;i++);
+
+	uint8_t status = 0x70;//TODO: VERIFICAR o que o CAP fez
+	W_REGISTER(0x07,1,&status);
+	for (i=0;i<0xffff;i++);
 
 	//Delay_ms(2);//tempo de startup
-	for (i=0;i<0x1fffffe;i++);
+	for (i=0;i<0x1fffe;i++);
 	return;
 }
 
@@ -298,9 +301,8 @@ void NRF::RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width){
 uint8_t NRF::DATA_READY(void){
 	uint8_t rx_empty=0;
 	//passa aqui
-	//NOP();
 	R_REGISTER(0x17,1,&rx_empty);
-	STM_EVAL_LEDOn(LED5);
+	STM_EVAL_LEDToggle(LED5);
 	//não passa aqui
 	rx_empty &= RX_EMPTY_MASK;
 
@@ -366,11 +368,7 @@ uint8_t NRF::RECEIVE(uint8_t* data){
 	//start_listen();//TODO: SHOULD I REMOVE THIS?
 	//passa aqui
 
-	while(!DATA_READY()){
-		//não chega aqui
-		STM_EVAL_LEDToggle(LED3);//TODO REMOVER APÓS DEBUG
-		Delay_ms(250);//TODO REMOVER APÓS DEBUG
-	}
+	while(!DATA_READY());
 
 	//espera até receber algo
 
