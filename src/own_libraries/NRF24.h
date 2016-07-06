@@ -152,8 +152,8 @@ class NRF : private SPI, public NRF_REGISTER_MAP {
 private:
 	GPIO_TypeDef* NRF_CE_GPIO;	//usar como default: GPIOA
 	uint16_t NRF_CE_Pin;		//usar como default: GPIO_Pin_3
-	GPIO_TypeDef* NRF_IRQ_GPIO;	//TODO: confirmar se o default escolhido está disponível
-	uint16_t NRF_IRQ_Pin;		//TODO: confirmar se o default escolhido está disponível
+	GPIO_TypeDef* NRF_IRQ_GPIO;
+	uint16_t NRF_IRQ_Pin;
 
 //métodos
 public:
