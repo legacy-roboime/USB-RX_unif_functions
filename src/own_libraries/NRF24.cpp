@@ -70,7 +70,6 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	NVIC_Init(&NVIC_cfg);
 
 	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));
-	/*TODO: FAZER O OVERRIDE DOS HANDLERS*/
 
 	//MOSI, MISO, SCK GPIO configuration
 	GPIO_InitTypeDef GPIO_SPI_Pins_initstruct;
