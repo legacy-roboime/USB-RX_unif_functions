@@ -371,7 +371,7 @@ uint8_t NRF::RECEIVE(uint8_t* data){
 
 	//espera até receber algo
 
-	stop_listen();//TODO: SHOULD I REMOVE THIS?
+	stop_listen();//TODO: REMOVER ESSA LINHA OU DESCOMENTAR A LINHA DO START_LISTEN()
 	READ_RX_FIFO(data);
 
 	uint8_t status;
