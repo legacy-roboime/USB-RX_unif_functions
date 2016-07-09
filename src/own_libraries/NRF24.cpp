@@ -368,10 +368,8 @@ uint8_t NRF::RECEIVE(uint8_t* data){
 	//passa aqui
 
 	while(!DATA_READY());
-
 	//espera até receber algo
 
-	//top_listen();//TODO: REMOVER ESSA LINHA OU DESCOMENTAR A LINHA DO START_LISTEN()
 	READ_RX_FIFO(data);
 
 	uint8_t status;
