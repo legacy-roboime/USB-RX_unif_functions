@@ -52,8 +52,7 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	GPIO_IRQ_initstruct.GPIO_Speed	= GPIO_Speed_50MHz;
 	GPIO_Init(NRF_IRQ_GPIO,&GPIO_IRQ_initstruct);
 
-	//TODO: experimentar configurar o EXTI antes de config o NVIC
-	//TODO: experimentar também inicializar o clock do SYSCFG depois do clock do IRQ_GPIO
+	//TODO: experimentar inicializar o clock do SYSCFG depois do clock do IRQ_GPIO
 
 	EXTI_InitTypeDef EXTI_cfg;
 	EXTI_cfg.EXTI_Line		= EXTI_Line(NRF_IRQ_Pin);
@@ -110,9 +109,8 @@ void NRF::ASSERT_CE(int STATE){
 
 //supõe que o NRF estava desligado e põe ele em standby-I
 void NRF::begin(){
-	Delay_ms(11);//TODO remover
 	int i;
-	//for (i=0;i<0xafff5;i++);TODO: colocar de novo
+	for (i=0;i<0xafff5;i++);//Delay_ms(11);
 
 	ASSERT_CS(SET);
 	ASSERT_CE(RESET);
@@ -127,9 +125,10 @@ void NRF::begin(){
 
 	//grava o novo valor de CONFIG
 	W_REGISTER(0x00,1,&config);
-	//for (i=0;i<0xffff;i++);TODO: colocar de novo
+	for (i=0;i<0xffff;i++);
 
-	uint8_t status = 0x70;//TODO: VERIFICAR o que o CAP fez
+	//Renault: escreveu 1 em 3 flags  que precisam ser  limpas no início
+	uint8_t status = 0b01110000;
 	W_REGISTER(0x07,1,&status);
 	for (i=0;i<0xffff;i++);
 

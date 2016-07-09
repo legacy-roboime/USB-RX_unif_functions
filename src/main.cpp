@@ -86,11 +86,16 @@ int main(void)
   {
 	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5)){
 		  STM_EVAL_LEDOn(LED3);
+		  STM_EVAL_LEDOff(LED4);
 		  if(EXTI_GetITStatus(EXTI_Line5)!=RESET)
 			  STM_EVAL_LEDOn(LED5);
+		  else
+			  STM_EVAL_LEDOff(LED5);
 	  }
-	  else
+	  else{
+		  STM_EVAL_LEDOff(LED3);
 		  STM_EVAL_LEDOn(LED4);
+	  }
   }
 }
 
