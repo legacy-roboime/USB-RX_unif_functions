@@ -110,22 +110,24 @@ void NRF::ASSERT_CE(int STATE){
 
 //supõe que o NRF estava desligado e põe ele em standby-I
 void NRF::begin(){
-	//Delay_ms(11);
+	Delay_ms(11);//TODO remover
 	int i;
-	for (i=0;i<0xafff5;i++);
+	//for (i=0;i<0xafff5;i++);TODO: colocar de novo
 
 	ASSERT_CS(SET);
 	ASSERT_CE(RESET);
 
 	//lê CONFIG
 	uint8_t config;
+
 	R_REGISTER(0x00,1, &config);
 
 	//faz PWR_UP=1
 	config = 0b00000010;
+
 	//grava o novo valor de CONFIG
 	W_REGISTER(0x00,1,&config);
-	for (i=0;i<0xffff;i++);
+	//for (i=0;i<0xffff;i++);TODO: colocar de novo
 
 	uint8_t status = 0x70;//TODO: VERIFICAR o que o CAP fez
 	W_REGISTER(0x07,1,&status);
@@ -366,10 +368,8 @@ uint8_t NRF::RECEIVE(uint8_t* data){
 	//passa aqui
 
 	while(!DATA_READY());
-
 	//espera até receber algo
 
-	stop_listen();//TODO: REMOVER ESSA LINHA OU DESCOMENTAR A LINHA DO START_LISTEN()
 	READ_RX_FIFO(data);
 
 	uint8_t status;
