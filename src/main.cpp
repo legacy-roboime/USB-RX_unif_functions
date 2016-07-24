@@ -84,6 +84,9 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+/*	  se IRQ=high,led laranja acende e verde fica apagado,
+	  além disso, o led vermelho acende se e só se a interrupção estiver ativada
+	  se IRQ=low, apaga o led laranja e acende o verde*/
 	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5)){
 		  STM_EVAL_LEDOn(LED3);
 		  STM_EVAL_LEDOff(LED4);

@@ -373,12 +373,12 @@ uint8_t NRF::RECEIVE(uint8_t* data){
 
 	uint8_t status;
 	R_REGISTER(0x07,1,&status);
-	for (int i=0;i<0xffff;i++);
+	STD_ITER_DELAY
 
 	//reseta a IRQ, conforme a product specification
 	status |= RX_DR_MASK;
 	W_REGISTER(0x07,1,&status);
-	for (int i=0;i<0xffff;i++);
+	STD_ITER_DELAY
 
 	return 1;
 }
@@ -393,21 +393,21 @@ void NRF::READ_RX_FIFO(uint8_t* pointer){
 	//lê o RX_PW_Px correspondente àquela pipe
 	uint8_t payload_length;
 	R_REGISTER(0x11+RX_Pipe,1,&payload_length);
-	for (int i=0;i<0xffff;i++);
+	STD_ITER_DELAY
 
 	CMD(0x61,payload_length,0x00,pointer);//comando R_RX_PLD
-	for (int i=0;i<0xffff;i++);
+	STD_ITER_DELAY
 
 	//TODO: importar modificação para o RX_unif_functions
 	//reseta a flag RX_DR para que IRQ possa subir de novo
 	uint8_t status;
 	R_REGISTER(0x07,1,&status);
-	for (int i=0;i<0xffff;i++);
+	STD_ITER_DELAY
 
 	status |= RX_DR_MASK;
 	W_REGISTER(0x07,1,&status);//Write 1 to clear RX_DR bit.
 
-	for (int i=0;i<0xffff;i++);
+	STD_ITER_DELAY
 	return;
 }
 
