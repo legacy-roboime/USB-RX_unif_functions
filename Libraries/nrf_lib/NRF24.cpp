@@ -315,12 +315,12 @@ uint8_t NRF::DATA_READY(void){
 uint8_t NRF::TRANSMITTED(void){
 	uint8_t tx_empty;
 	R_REGISTER(0x17,1,&tx_empty);
-	for (int i=0;i<0x1dc4;i++);
+	for (int i=0;i<0x4c;i++);
 	tx_empty &= TX_EMPTY_MASK;
 
 	uint8_t tx_ds;
 	R_REGISTER(0x07,1,&tx_ds);
-	for (int i=0;i<0x1dc4;i++);
+	for (int i=0;i<0x4c;i++);
 	tx_ds &= TX_DS_MASK;
 
 	if(tx_ds || !tx_empty)
@@ -333,11 +333,11 @@ uint8_t NRF::TRANSMITTED(void){
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::SEND(uint8_t* data, uint8_t size){
 	W_TX_PAYLOAD(data,size);
-	for (int i=0;i<0x1dc4;i++);
+	for (int i=0;i<0x4c;i++);
 
 	//pulse on CE to start transmission
 	ASSERT_CE(SET);
-	for (int i=0;i<0x1dc4;i++);//minimum pulse width = 10us
+	for (int i=0;i<0x98;i++);//minimum pulse width = 10us, here we use 20us
 	ASSERT_CE(RESET);
 
 	return TRANSMITTED();
