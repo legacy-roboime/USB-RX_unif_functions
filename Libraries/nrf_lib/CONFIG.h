@@ -15,7 +15,8 @@
 #define STD_ITER_DELAY for (int i=0;i<0xee2;i++);
 
 void TimingDelay_Decrement(void);
-void Delay_ms(uint32_t time);
+void Delay_us(uint32_t time_us);
+void Delay_ms(uint32_t time_ms);
 void Delay_s(unsigned char s);
 
 int GPIO_Clock_Cmd(GPIO_TypeDef* GPIOx, FunctionalState STATE);
