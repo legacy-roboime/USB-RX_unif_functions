@@ -57,7 +57,7 @@ NRF* radio_ptr;
 
 int main(void)
 {
-  SysTick_Config(SystemCoreClock/1000);
+  SysTick_Config(SystemCoreClock/1000000);
   /**
   *  IMPORTANT NOTE!
   *  The symbol VECT_TAB_SRAM needs to be defined when building the project
