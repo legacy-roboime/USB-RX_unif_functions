@@ -129,6 +129,7 @@ void NRF::begin(){
 	//Renault: escreveu 1 em 3 flags  que precisam ser  limpas no início
 	uint8_t status = 0b01110000;
 	W_REGISTER(0x07,1,&status);
+	int i;
 	for (i=0;i<0xffff;i++);
 
 	Delay_ms(2);//tempo de startup
