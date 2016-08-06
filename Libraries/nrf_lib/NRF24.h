@@ -7,9 +7,10 @@
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
 #include "stm32f4xx_gpio.h"
-#include "own_libraries/REGISTER.h"
-#include "own_libraries/NRF_REGISTER_MAP.h"
-#include "own_libraries/SPI_interface.h"
+#include "REGISTER.h"
+#include "NRF_REGISTER_MAP.h"
+#include "SPI_interface.h"
+#include "CONFIG.h"
 
 #ifndef NRF24_H_
 #define NRF24_H_

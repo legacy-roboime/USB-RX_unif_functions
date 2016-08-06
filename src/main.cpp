@@ -15,9 +15,9 @@
 /* Includes */
 #include "main.h"
 
-#include "own_libraries/NRF24.h"
-#include "own_libraries/CONFIG.h"
-#include "own_libraries/SPI_interface.h"
+#include "NRF24.h"
+#include "CONFIG.h"
+#include "SPI_interface.h"
 
 uint32_t TimingDelay;
 

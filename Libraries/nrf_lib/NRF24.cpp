@@ -7,8 +7,8 @@
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
 #include "stm32f4xx_gpio.h"
-#include "own_libraries/CONFIG.h"
-#include "own_libraries/NRF24.h"
+#include "CONFIG.h"
+#include "NRF24.h"
 
 NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 		GPIO_TypeDef* IRQ_GPIO,uint16_t IRQ_Pin,
@@ -109,8 +109,7 @@ void NRF::ASSERT_CE(int STATE){
 
 //supõe que o NRF estava desligado e põe ele em standby-I
 void NRF::begin(){
-	int i;
-	for (i=0;i<0xafff5;i++);//Delay_ms(11);
+	Delay_ms(11);
 
 	ASSERT_CS(SET);
 	ASSERT_CE(RESET);
@@ -125,27 +124,25 @@ void NRF::begin(){
 
 	//grava o novo valor de CONFIG
 	W_REGISTER(0x00,1,&config);
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
 
 	//Renault: escreveu 1 em 3 flags  que precisam ser  limpas no início
 	uint8_t status = 0b01110000;
 	W_REGISTER(0x07,1,&status);
 	for (i=0;i<0xffff;i++);
 
-	//Delay_ms(2);//tempo de startup
-	for (i=0;i<0x1fffe;i++);
+	Delay_ms(2);//tempo de startup
 	return;
 }
 
 void NRF::stdbyI_to_TX(uint8_t channel){
 	uint8_t config;
 	R_REGISTER(0x00,1,&config);
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
 
 	config &= 0b11111110;//makes PRIM_RX=0 (transmitter)
 	W_REGISTER(0x00,1,&config);
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
 
 	RF_CH_setup(channel);//setup of frequency
 	return;
@@ -154,13 +151,11 @@ void NRF::stdbyI_to_TX(uint8_t channel){
 void NRF::stdbyI_to_RX(uint8_t channel){
 	uint8_t config;
 	R_REGISTER(0x00,1,&config);
-
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
 
 	config |= 0b00000001;//makes PRIM_RX=1 (receiver)
 	W_REGISTER(0x00,1,&config);
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
 
 	RF_CH_setup(channel);//setup of frequency
 	return;
@@ -171,9 +166,8 @@ void NRF::EN_AA_setup(uint8_t ENAA_Px){
 	uint8_t en_aa = ENAA_Px;
 
 	W_REGISTER(0x01,1,&en_aa);
-
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -182,8 +176,8 @@ void NRF::EN_RXADDR_setup(uint8_t ERX_Px){
 	uint8_t en_pipes = ERX_Px;
 
 	W_REGISTER(0x02,1,&en_pipes);
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -193,9 +187,8 @@ void NRF::SETUP_AW_setup(uint8_t AW){
 	uint8_t address_width = AW;
 
 	W_REGISTER(0x03,1,&address_width);
-
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -205,9 +198,8 @@ void NRF::SETUP_RETR_setup(uint8_t setup_retries){
 	uint8_t ARconfig = setup_retries;
 
 	W_REGISTER(0x04,1,&ARconfig);
-
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -216,9 +208,8 @@ void NRF::RF_CH_setup(uint8_t channel){
 	uint8_t rf_ch = channel;
 
 	W_REGISTER(0x05,1,&rf_ch);
-
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -227,9 +218,8 @@ void NRF::RF_SETUP_setup(uint8_t configuration){
 	uint8_t rf_setup =  configuration;
 
 	W_REGISTER(0x06,1,&rf_setup);
-
-	int i;
-	for (i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -242,9 +232,8 @@ void NRF::RX_ADDR_Px_setup(uint8_t RX_Pipe,uint8_t* pointer){
 	else{
 		//TODO:melhorar a portabilidade, adicionar constantes com o endereço de cada registrador
 		W_REGISTER(0x0a+RX_Pipe,1,pointer);
-
-		int i;
-		for (i=0;i<0xffff;i++);
+		Delay_ms(1);
+	
 	}
 	return;
 }//WORKED!
@@ -264,7 +253,8 @@ void NRF::RX_ADDR_P0_setup(uint8_t* pointer){
 		size = 5;
 	//TODO:melhorar a portabilidade, adicionar constantes com o endereço de cada registrador
 	W_REGISTER(0x0a,size,pointer);
-	for (int i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -283,7 +273,8 @@ void NRF::RX_ADDR_P1_setup(uint8_t* pointer){
 		size = 5;
 	//TODO:melhorar a portabilidade, adicionar constantes com o endereço de cada registrador
 	W_REGISTER(0x0b,size,pointer);
-	for (int i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -293,7 +284,8 @@ void NRF::RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width){
 
 	//TODO:melhorar a portabilidade, adicionar constantes com o endereço de cada registrador
 	W_REGISTER(0x11+RX_Pipe,1,&pw);
-	for (int i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }//WORKED!
 
@@ -533,7 +525,8 @@ void NRF::TX_configure(config_Struct* pointer){
 //TODO: melhorar a implementação, para só escrever os registradores que realmente precisam ser configurados
 void NRF::TX_ADDR_setup(uint8_t* pointer){
 	W_REGISTER(0x10,5,pointer);
-	for (int i=0;i<0xffff;i++);
+	Delay_ms(1);
+	
 	return;
 }
 
@@ -543,7 +536,8 @@ void NRF::RESET_ALL_REGISTERS(){
 	REGISTER* current_register = &(CONFIG);
 	for(i=0x00;i<=0x19;i++){
 		W_REGISTER(current_register->get_address(),current_register->get_size(),current_register->content);
-		for (i=0;i<0xffff;i++);
+		Delay_ms(1);
+	
 		current_register++;
 	}
 
