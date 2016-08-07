@@ -557,6 +557,16 @@ void NRF::TX_configure(config_Struct* pointer){
 		RX_ADDR_Px_pointer++;//passa a apontar para o próximo RX_ADDR_Px da struct
 	}
 
+	//tenta escrever no registrador FEATURE, se falhar, precisa ser ativado
+	uint8_t feat=0b111;
+	W_REGISTER(0x1d,1,&feat);
+	Delay_ms(1);
+	R_REGISTER(0x1d,1,&feat);
+	Delay_ms(1);
+	if(!feat){//se feat permanece nulo
+		ACTIVATE();
+	}
+
 	FEATURE_setup(pointer->FEATURE);
 	DYNPD_setup(pointer->DYNPD);
 
