@@ -126,11 +126,9 @@ void NRF::begin(){
 	W_REGISTER(0x00,1,&config);
 	Delay_ms(1);
 
-	//Renault: escreveu 1 em 3 flags  que precisam ser  limpas no início
+	//Renault: escreveu 1 em 3 flags  que precisam ser  limpas no início (RX_DR,TX_DS,MAX_RT)
 	uint8_t status = 0b01110000;
 	W_REGISTER(0x07,1,&status);
-	int i;
-	for (i=0;i<0xffff;i++);
 
 	Delay_ms(2);//tempo de startup
 	return;
@@ -290,6 +288,24 @@ void NRF::RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width){
 	return;
 }//WORKED!
 
+void NRF::FEATURE_setup(uint8_t FEATURE){
+	uint8_t feature = FEATURE;
+
+	W_REGISTER(0x1d,1,&feature);
+	Delay_ms(1);
+
+	return;
+}
+
+void NRF::DYNPD_setup(uint8_t DYNPD){
+	uint8_t dynpd = DYNPD;
+
+	W_REGISTER(0x1c,1,&dynpd);
+	Delay_ms(1);
+
+	return;
+}
+
 //retorna 1 se o NRF24 recebeu alguma coisa, retorna 0 se ainda não recebeu nada
 uint8_t NRF::DATA_READY(void){
 	uint8_t rx_empty=0;
@@ -315,12 +331,12 @@ uint8_t NRF::DATA_READY(void){
 uint8_t NRF::TRANSMITTED(void){
 	uint8_t tx_empty;
 	R_REGISTER(0x17,1,&tx_empty);
-	for (int i=0;i<0x2fa;i++);
+	for (int i=0;i<0x1dc4;i++);
 	tx_empty &= TX_EMPTY_MASK;
 
 	uint8_t tx_ds;
 	R_REGISTER(0x07,1,&tx_ds);
-	for (int i=0;i<0x2fa;i++);
+	for (int i=0;i<0x1dc4;i++);
 	tx_ds &= TX_DS_MASK;
 
 	if(tx_ds || !tx_empty)
@@ -333,11 +349,11 @@ uint8_t NRF::TRANSMITTED(void){
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::SEND(uint8_t* data, uint8_t size){
 	W_TX_PAYLOAD(data,size);
-	for (int i=0;i<0x2fa;i++);
+	for (int i=0;i<0x1dc4;i++);
 
 	//pulse on CE to start transmission
 	ASSERT_CE(SET);
-	for (int i=0;i<0x2fa;i++);//minimum pulse width = 10us, here we use 100us
+	for (int i=0;i<0x1dc4;i++);//minimum pulse width = 10us, here we use 100us
 	ASSERT_CE(RESET);
 
 	return TRANSMITTED();
@@ -356,7 +372,6 @@ void NRF::stop_listen(){
 //data: ponteiro para os bytes a serem transmitidos; size: número de bytes a enviar
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::RECEIVE(uint8_t* data){
-	//start_listen();//TODO: SHOULD I REMOVE THIS?
 	//passa aqui
 
 	while(!DATA_READY());
@@ -391,7 +406,6 @@ void NRF::READ_RX_FIFO(uint8_t* pointer){
 	CMD(0x61,payload_length,0x00,pointer);//comando R_RX_PLD
 	STD_ITER_DELAY
 
-	//TODO: importar modificação para o RX_unif_functions
 	//reseta a flag RX_DR para que IRQ possa subir de novo
 	uint8_t status;
 	R_REGISTER(0x07,1,&status);
@@ -416,14 +430,22 @@ void NRF::RX_configure(){
 	uint8_t myAddress[]={0xe7,0xe7,0xe7,0xe7,0xe7};
 
 	config_Struct configuration;
-	configuration.AW_x_bytes=AW_5_bytes;
+	configuration.AW_x_bytes			=AW_5_bytes;
+	configuration.ERX_Px				=ERX_P0;
+	configuration.RETR_ARC_and_ARD		=RETR_ARC_DISABLE_RETRANSMIT;//TODO: alterar AutoACK option
+	configuration.RF_SETUP				=RF_SETUP_Data_Rate_2Mbps;
+	configuration.channel				=0x02;
+	configuration.RX_ADDR_P0			=myAddress;
+	configuration.payload_width_pipe_0	=5;
+	configuration.TX_ADDR				=myAddress;//TX_ADDR=RX_ADDR_P0 para permitir autoACK com o Enhanced Shockburst ativado
+
+#ifdef USE_AUTOACK
+	configuration.ENAA_Px=ENAA_P0;//write 1 in some bit of EN_AA will force high on EN_CRC bit
+	configuration.FEATURE=FEATURE_EN_ACK_PAY|FEATURE_EN_DPL|FEATURE_EN_DYN_ACK;
+	configuration.DYNPD  =DYNPD_DPL_P0;
+#else
 	configuration.ENAA_Px=ENAA_Disable_All_Pipes;
-	configuration.ERX_Px=ERX_P0;
-	configuration.RETR_ARC_and_ARD=RETR_ARC_DISABLE_RETRANSMIT;//TODO: alterar AutoACK option
-	configuration.RF_SETUP=RF_SETUP_Data_Rate_2Mbps;
-	configuration.channel=0x02;
-	configuration.RX_ADDR_P0=myAddress;
-	configuration.payload_width_pipe_0=5;
+#endif
 
 	RX_configure(&configuration);
 
@@ -465,6 +487,9 @@ void NRF::RX_configure(config_Struct* pointer){
 		RX_ADDR_Px_pointer++;//passa a apontar para o próximo RX_ADDR_Px da struct
 	}
 
+	FEATURE_setup(pointer->FEATURE);
+	DYNPD_setup(pointer->DYNPD);
+
 	return;
 }
 
@@ -474,12 +499,22 @@ void NRF::TX_configure(){
 
 	config_Struct configuration;
 	configuration.AW_x_bytes=AW_5_bytes;
-	configuration.ENAA_Px=ENAA_Disable_All_Pipes;
-	configuration.ERX_Px=ERX_P0;
-	configuration.RETR_ARC_and_ARD=RETR_ARC_DISABLE_RETRANSMIT;//TODO: alterar AutoACK option
 	configuration.RF_SETUP=RF_SETUP_Data_Rate_2Mbps;
 	configuration.channel=0x02;
 	configuration.TX_ADDR=ReceiverAddress;
+
+	#ifdef USE_AUTOACK
+		configuration.ENAA_Px=ENAA_P0;
+		configuration.ERX_Px=ERX_P0;
+		configuration.RETR_ARC_and_ARD=RETR_ARC_15_RETRANSMIT|RETR_ARD_wait_4000_us;//até 15 tentativas, 1 a cada 4ms
+		configuration.RX_ADDR_P0=configuration.TX_ADDR;//para permitir AutoACK
+		configuration.FEATURE=FEATURE_EN_ACK_PAY|FEATURE_EN_DPL|FEATURE_EN_DYN_ACK;
+		configuration.DYNPD  =DYNPD_DPL_P0;
+	#else //se o AUTOACK NÃO estiver sendo usado
+		configuration.ENAA_Px=ENAA_Disable_All_Pipes;
+		configuration.ERX_Px=ERX_Disable_All_Pipes;
+		configuration.RETR_ARC_and_ARD=RETR_ARC_DISABLE_RETRANSMIT;
+	#endif
 
 	TX_configure(&configuration);
 
@@ -500,6 +535,8 @@ void NRF::TX_configure(config_Struct* pointer){
 
 	RF_SETUP_setup(pointer->RF_SETUP);
 
+	TX_ADDR_setup(pointer->TX_ADDR);
+
 	//TODO: fazer a verificação de quais as pipes precisam ser configuradas e quais as payloads de cada uma
 	uint8_t* payload_width_pointer = &(pointer->payload_width_pipe_0);
 	uint8_t i;
@@ -519,6 +556,9 @@ void NRF::TX_configure(config_Struct* pointer){
 		}
 		RX_ADDR_Px_pointer++;//passa a apontar para o próximo RX_ADDR_Px da struct
 	}
+
+	FEATURE_setup(pointer->FEATURE);
+	DYNPD_setup(pointer->DYNPD);
 
 	return;
 }

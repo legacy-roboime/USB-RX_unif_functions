@@ -114,6 +114,19 @@ typedef enum{
 #define RF_SETUP_PWR_0dBm			0b00000110
 #define RF_SETUP_LNA_HCURR			0b00000001
 
+//constants to use when filling FEATURE register
+#define FEATURE_EN_DYN_ACK	0b00000001
+#define FEATURE_EN_ACK_PAY	0b00000010
+#define FEATURE_EN_DPL		0b00000100
+
+//constants to use when filling DYNPD register
+#define DYNPD_DPL_P0		0b00000001
+#define DYNPD_DPL_P1		0b00000010
+#define DYNPD_DPL_P2		0b00000100
+#define DYNPD_DPL_P3		0b00001000
+#define DYNPD_DPL_P4		0b00010000
+#define DYNPD_DPL_P5		0b00100000
+
 //other useful constants
 #define RX_EMPTY_MASK 	0b00000001
 #define TX_EMPTY_MASK	0b00010000
@@ -146,6 +159,9 @@ typedef struct{
 	uint8_t* RX_ADDR_P3;
 	uint8_t* RX_ADDR_P4;
 	uint8_t* RX_ADDR_P5;
+
+	uint8_t DYNPD;
+	uint8_t FEATURE;
 }config_Struct;
 
 class NRF : private SPI, public NRF_REGISTER_MAP {
@@ -197,6 +213,8 @@ private:
 	void RX_ADDR_P1_setup(uint8_t* pointer);//WORKED!
 	void TX_ADDR_setup(uint8_t* pointer);
 	void RX_PW_Px_setup(uint8_t RX_Pipe, uint8_t payload_width);
+	void FEATURE_setup(uint8_t FEATURE);
+	void DYNPD_setup(uint8_t DYNPD);
 	uint8_t DATA_READY(void);//WORKED!
 	uint8_t TRANSMITTED(void);
 	void READ_RX_FIFO(uint8_t* pointer);

@@ -11,8 +11,8 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-//macro: standard iteractive delay of about 8us
-#define STD_ITER_DELAY for (int i=0;i<0x3c;i++);
+//macro: standard iteractive delay of about 500us
+#define STD_ITER_DELAY for (int i=0;i<0xee2;i++);
 
 void TimingDelay_Decrement(void);
 void Delay_us(uint32_t time_us);
