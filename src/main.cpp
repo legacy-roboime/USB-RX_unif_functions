@@ -84,6 +84,11 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+#ifdef USE_AUTOACK
+/*		static uint8_t ack[]={'h','e','l','l','o'};
+		//radio_ptr->FLUSH_TX();//TODO: seria bom conseguir um jeito de limpar a TX FIFO antes de enviar o ACK
+		radio.W_ACK_PAYLOAD(0,ack,5);*/
+#endif
 /*	  se IRQ=high,led laranja acende e verde fica apagado,
 	  além disso, o led vermelho acende se e só se a interrupção estiver ativada
 	  se IRQ=low, apaga o led laranja e acende o verde*/
@@ -108,6 +113,7 @@ uint8_t USB_receive_and_put(NRF* radio_ptr){
 
 	if(radio_ptr->RECEIVE(data)){
 		VCP_send_buffer(data,5);
+
 		//TODO: testar se ainda há pacotes para ler, COMO O MANUAL MANDA
 /*		if(radio_ptr->DATA_READY()){
 			STM_EVAL_LEDOn(LED5);

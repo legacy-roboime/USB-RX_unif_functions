@@ -313,14 +313,12 @@ uint8_t NRF::DATA_READY(void){
 	R_REGISTER(0x17,1,&rx_empty);
 	rx_empty &= RX_EMPTY_MASK;
 
-	//TODO: contornar o problema de não conseguir resetar flag RX_DR
-/*	uint8_t rx_dr;
+	uint8_t rx_dr;
 	R_REGISTER(0x07,1,&rx_dr);
-	for (i=0;i<0xffff;i++);
-	rx_dr &= RX_DR_MASK;*/
+	STD_ITER_DELAY
+	rx_dr &= RX_DR_MASK;
 
-//	if(rx_dr || !rx_empty){
-	if(!rx_empty){//TODO: contornar o problema de não conseguir resetar flag RX_DR
+	if(rx_dr || !rx_empty){
 		return 1;
 	}
 	else
@@ -330,19 +328,29 @@ uint8_t NRF::DATA_READY(void){
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::TRANSMITTED(void){
 	uint8_t tx_empty;
-	R_REGISTER(0x17,1,&tx_empty);
-	for (int i=0;i<0x1dc4;i++);
-	tx_empty &= TX_EMPTY_MASK;
-
 	uint8_t tx_ds;
-	R_REGISTER(0x07,1,&tx_ds);
-	for (int i=0;i<0x1dc4;i++);
-	tx_ds &= TX_DS_MASK;
+#ifdef USE_AUTOACK
+	do{
+#endif
 
-	if(tx_ds || !tx_empty)
-		return 1;
-	else
-		return 0;
+		R_REGISTER(0x17,1,&tx_empty);
+		for (int i=0;i<0x1dc4;i++);
+		tx_empty &= TX_EMPTY_MASK;
+
+		R_REGISTER(0x07,1,&tx_ds);
+		for (int i=0;i<0x1dc4;i++);
+		tx_ds &= TX_DS_MASK;
+
+		//if(tx_ds || !tx_empty)
+		if(tx_ds)
+			return 1;
+#ifndef USE_AUTOACK
+		else
+			return 0;
+#endif
+#ifdef USE_AUTOACK
+	}while(!tx_ds);
+#endif
 }
 
 //data: ponteiro para os bytes a serem transmitidos; size: número de bytes a enviar
@@ -357,6 +365,13 @@ uint8_t NRF::SEND(uint8_t* data, uint8_t size){
 	ASSERT_CE(RESET);
 
 	return TRANSMITTED();
+}
+
+void NRF::W_ACK_PAYLOAD(uint8_t pipe,uint8_t* pointer,uint8_t number){
+	if(pipe>5)
+		return;
+	return SPI::W_ACK_PAYLOAD(pipe,pointer,number);
+
 }
 
 void NRF::start_listen(){
@@ -485,6 +500,16 @@ void NRF::RX_configure(config_Struct* pointer){
 			RX_ADDR_Px_setup(i,*RX_ADDR_Px_pointer);//configura o endereço da pipe i
 		}
 		RX_ADDR_Px_pointer++;//passa a apontar para o próximo RX_ADDR_Px da struct
+	}
+
+	//tenta escrever no registrador FEATURE, se falhar, precisa ser ativado
+	uint8_t feat=0b111;
+	W_REGISTER(0x1d,1,&feat);
+	Delay_ms(1);
+	R_REGISTER(0x1d,1,&feat);
+	Delay_ms(1);
+	if(!feat){//se feat permanece nulo
+		ACTIVATE();
 	}
 
 	FEATURE_setup(pointer->FEATURE);

@@ -189,6 +189,7 @@ public:
 	void stop_listen();
 	uint8_t RECEIVE(uint8_t* data);
 	uint8_t SEND(uint8_t* data, uint8_t size = 5);
+	void W_ACK_PAYLOAD(uint8_t pipe,uint8_t* pointer,uint8_t number);
 	void RX_configure(config_Struct* pointer);
 	void TX_configure(config_Struct* pointer);
 	void RX_configure();

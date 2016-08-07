@@ -25,6 +25,7 @@ protected:
 	int W_REGISTER(uint8_t adress, uint8_t size,uint8_t* value);//WORKED! but SPI seems too much fast to NRF
 	int R_REGISTER(uint8_t adress, uint8_t size,uint8_t* pointer);//WORKED!
 	uint8_t R_RX_PL_WID(void);
+	void W_ACK_PAYLOAD(uint8_t pipe,uint8_t* pointer,uint8_t number);
 	int R_RX_PAYLOAD(uint8_t* pointer);
 	int W_TX_PAYLOAD(uint8_t* pointer,uint8_t number);
 	void FLUSH_TX(void);//DOESN'T work

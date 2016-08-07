@@ -342,15 +342,15 @@ Discarded input sections
  .text._ZN3SPI11R_RX_PL_WIDEv
                 0x00000000       0x28 Libraries\nrf_lib\SPI_interface.o
  .text._ZN3SPI12R_RX_PAYLOADEPh
-                0x00000000       0xc8 Libraries\nrf_lib\SPI_interface.o
+                0x00000000       0xb8 Libraries\nrf_lib\SPI_interface.o
  .text._ZN3SPI12W_TX_PAYLOADEPhh
                 0x00000000       0x2c Libraries\nrf_lib\SPI_interface.o
  .text._ZN3SPI8FLUSH_TXEv
-                0x00000000       0xec Libraries\nrf_lib\SPI_interface.o
+                0x00000000       0xdc Libraries\nrf_lib\SPI_interface.o
  .text._ZN3SPI8FLUSH_RXEv
                 0x00000000       0xdc Libraries\nrf_lib\SPI_interface.o
- .text._ZN3SPI8ACTIVATEEv
-                0x00000000       0xf0 Libraries\nrf_lib\SPI_interface.o
+ .text._ZN3SPI13W_ACK_PAYLOADEhPhh
+                0x00000000       0x38 Libraries\nrf_lib\SPI_interface.o
  .text          0x00000000        0x0 Libraries\nrf_lib\REGISTER.o
  .data          0x00000000        0x0 Libraries\nrf_lib\REGISTER.o
  .bss           0x00000000        0x0 Libraries\nrf_lib\REGISTER.o
@@ -376,12 +376,14 @@ Discarded input sections
                 0x00000000       0x8c Libraries\nrf_lib\NRF24.o
  .text._ZN3NRF4SENDEPhh
                 0x00000000       0x68 Libraries\nrf_lib\NRF24.o
+ .text._ZN3NRF13W_ACK_PAYLOADEhPhh
+                0x00000000       0x34 Libraries\nrf_lib\NRF24.o
  .text._ZN3NRF11stop_listenEv
                 0x00000000       0x18 Libraries\nrf_lib\NRF24.o
  .text._ZN3NRF12TX_configureEv
                 0x00000000       0x5c Libraries\nrf_lib\NRF24.o
  .text._ZN3NRF12TX_configureEP13config_Struct
-                0x00000000      0x104 Libraries\nrf_lib\NRF24.o
+                0x00000000      0x148 Libraries\nrf_lib\NRF24.o
  .text._ZN3NRF13TX_ADDR_setupEPh
                 0x00000000       0x28 Libraries\nrf_lib\NRF24.o
  .text._ZN3NRF19RESET_ALL_REGISTERSEv
@@ -2137,7 +2139,7 @@ LOAD c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib
                 0x08000000                g_pfnVectors
                 0x08000188                . = ALIGN (0x4)
 
-.text           0x08000188     0x64fc
+.text           0x08000188     0x6668
                 0x08000188                . = ALIGN (0x4)
  *(.text)
  .text          0x08000188       0x40 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
@@ -2638,332 +2640,335 @@ LOAD c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib
  .text._ZN3SPI10R_REGISTEREhhPh
                 0x0800467c       0x38 Libraries\nrf_lib\SPI_interface.o
                 0x0800467c                SPI::R_REGISTER(unsigned char, unsigned char, unsigned char*)
+ .text._ZN3SPI8ACTIVATEEv
+                0x080046b4       0xf0 Libraries\nrf_lib\SPI_interface.o
+                0x080046b4                SPI::ACTIVATE()
  .text._ZN3SPI3NOPEv
-                0x080046b4       0x24 Libraries\nrf_lib\SPI_interface.o
-                0x080046b4                SPI::NOP()
+                0x080047a4       0x24 Libraries\nrf_lib\SPI_interface.o
+                0x080047a4                SPI::NOP()
  .text._ZN8REGISTERC2Ev
-                0x080046d8       0x40 Libraries\nrf_lib\REGISTER.o
-                0x080046d8                REGISTER::REGISTER()
-                0x080046d8                REGISTER::REGISTER()
+                0x080047c8       0x40 Libraries\nrf_lib\REGISTER.o
+                0x080047c8                REGISTER::REGISTER()
+                0x080047c8                REGISTER::REGISTER()
  .text._ZN8REGISTER8set_sizeEh
-                0x08004718       0x20 Libraries\nrf_lib\REGISTER.o
-                0x08004718                REGISTER::set_size(unsigned char)
+                0x08004808       0x20 Libraries\nrf_lib\REGISTER.o
+                0x08004808                REGISTER::set_size(unsigned char)
  .text._ZN8REGISTER11set_addressEh
-                0x08004738       0x20 Libraries\nrf_lib\REGISTER.o
-                0x08004738                REGISTER::set_address(unsigned char)
+                0x08004828       0x20 Libraries\nrf_lib\REGISTER.o
+                0x08004828                REGISTER::set_address(unsigned char)
  .text._ZN16NRF_REGISTER_MAPC2Ev
-                0x08004758      0x320 Libraries\nrf_lib\NRF_REGISTER_MAP.o
-                0x08004758                NRF_REGISTER_MAP::NRF_REGISTER_MAP()
-                0x08004758                NRF_REGISTER_MAP::NRF_REGISTER_MAP()
+                0x08004848      0x320 Libraries\nrf_lib\NRF_REGISTER_MAP.o
+                0x08004848                NRF_REGISTER_MAP::NRF_REGISTER_MAP()
+                0x08004848                NRF_REGISTER_MAP::NRF_REGISTER_MAP()
  .text._ZN3NRF10W_REGISTEREhhPh
-                0x08004a78       0x2c Libraries\nrf_lib\NRF24.o
-                0x08004a78                NRF::W_REGISTER(unsigned char, unsigned char, unsigned char*)
+                0x08004b68       0x2c Libraries\nrf_lib\NRF24.o
+                0x08004b68                NRF::W_REGISTER(unsigned char, unsigned char, unsigned char*)
  .text._ZN3NRF10R_REGISTEREhhPh
-                0x08004aa4       0x2c Libraries\nrf_lib\NRF24.o
-                0x08004aa4                NRF::R_REGISTER(unsigned char, unsigned char, unsigned char*)
+                0x08004b94       0x2c Libraries\nrf_lib\NRF24.o
+                0x08004b94                NRF::R_REGISTER(unsigned char, unsigned char, unsigned char*)
  .text._ZN3NRFC2EP12GPIO_TypeDeftS1_tP11SPI_TypeDefS1_tS1_tS1_tS1_t
-                0x08004ad0      0x228 Libraries\nrf_lib\NRF24.o
-                0x08004ad0                NRF::NRF(GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, SPI_TypeDef*, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short)
-                0x08004ad0                NRF::NRF(GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, SPI_TypeDef*, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short)
+                0x08004bc0      0x228 Libraries\nrf_lib\NRF24.o
+                0x08004bc0                NRF::NRF(GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, SPI_TypeDef*, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short)
+                0x08004bc0                NRF::NRF(GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, SPI_TypeDef*, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short)
  .text._ZN3NRF9ASSERT_CEEi
-                0x08004cf8       0x48 Libraries\nrf_lib\NRF24.o
-                0x08004cf8                NRF::ASSERT_CE(int)
+                0x08004de8       0x48 Libraries\nrf_lib\NRF24.o
+                0x08004de8                NRF::ASSERT_CE(int)
  .text._ZN3NRF5beginEv
-                0x08004d40       0x78 Libraries\nrf_lib\NRF24.o
-                0x08004d40                NRF::begin()
+                0x08004e30       0x78 Libraries\nrf_lib\NRF24.o
+                0x08004e30                NRF::begin()
  .text._ZN3NRF12stdbyI_to_RXEh
-                0x08004db8       0x5c Libraries\nrf_lib\NRF24.o
-                0x08004db8                NRF::stdbyI_to_RX(unsigned char)
+                0x08004ea8       0x5c Libraries\nrf_lib\NRF24.o
+                0x08004ea8                NRF::stdbyI_to_RX(unsigned char)
  .text._ZN3NRF11EN_AA_setupEh
-                0x08004e14       0x30 Libraries\nrf_lib\NRF24.o
-                0x08004e14                NRF::EN_AA_setup(unsigned char)
- .text._ZN3NRF15EN_RXADDR_setupEh
-                0x08004e44       0x30 Libraries\nrf_lib\NRF24.o
-                0x08004e44                NRF::EN_RXADDR_setup(unsigned char)
- .text._ZN3NRF14SETUP_AW_setupEh
-                0x08004e74       0x30 Libraries\nrf_lib\NRF24.o
-                0x08004e74                NRF::SETUP_AW_setup(unsigned char)
- .text._ZN3NRF16SETUP_RETR_setupEh
-                0x08004ea4       0x30 Libraries\nrf_lib\NRF24.o
-                0x08004ea4                NRF::SETUP_RETR_setup(unsigned char)
- .text._ZN3NRF11RF_CH_setupEh
-                0x08004ed4       0x30 Libraries\nrf_lib\NRF24.o
-                0x08004ed4                NRF::RF_CH_setup(unsigned char)
- .text._ZN3NRF14RF_SETUP_setupEh
                 0x08004f04       0x30 Libraries\nrf_lib\NRF24.o
-                0x08004f04                NRF::RF_SETUP_setup(unsigned char)
+                0x08004f04                NRF::EN_AA_setup(unsigned char)
+ .text._ZN3NRF15EN_RXADDR_setupEh
+                0x08004f34       0x30 Libraries\nrf_lib\NRF24.o
+                0x08004f34                NRF::EN_RXADDR_setup(unsigned char)
+ .text._ZN3NRF14SETUP_AW_setupEh
+                0x08004f64       0x30 Libraries\nrf_lib\NRF24.o
+                0x08004f64                NRF::SETUP_AW_setup(unsigned char)
+ .text._ZN3NRF16SETUP_RETR_setupEh
+                0x08004f94       0x30 Libraries\nrf_lib\NRF24.o
+                0x08004f94                NRF::SETUP_RETR_setup(unsigned char)
+ .text._ZN3NRF11RF_CH_setupEh
+                0x08004fc4       0x30 Libraries\nrf_lib\NRF24.o
+                0x08004fc4                NRF::RF_CH_setup(unsigned char)
+ .text._ZN3NRF14RF_SETUP_setupEh
+                0x08004ff4       0x30 Libraries\nrf_lib\NRF24.o
+                0x08004ff4                NRF::RF_SETUP_setup(unsigned char)
  .text._ZN3NRF16RX_ADDR_Px_setupEhPh
-                0x08004f34       0x50 Libraries\nrf_lib\NRF24.o
-                0x08004f34                NRF::RX_ADDR_Px_setup(unsigned char, unsigned char*)
+                0x08005024       0x50 Libraries\nrf_lib\NRF24.o
+                0x08005024                NRF::RX_ADDR_Px_setup(unsigned char, unsigned char*)
  .text._ZN3NRF16RX_ADDR_P0_setupEPh
-                0x08004f84       0x5c Libraries\nrf_lib\NRF24.o
-                0x08004f84                NRF::RX_ADDR_P0_setup(unsigned char*)
+                0x08005074       0x5c Libraries\nrf_lib\NRF24.o
+                0x08005074                NRF::RX_ADDR_P0_setup(unsigned char*)
  .text._ZN3NRF16RX_ADDR_P1_setupEPh
-                0x08004fe0       0x5c Libraries\nrf_lib\NRF24.o
-                0x08004fe0                NRF::RX_ADDR_P1_setup(unsigned char*)
+                0x080050d0       0x5c Libraries\nrf_lib\NRF24.o
+                0x080050d0                NRF::RX_ADDR_P1_setup(unsigned char*)
  .text._ZN3NRF14RX_PW_Px_setupEhh
-                0x0800503c       0x38 Libraries\nrf_lib\NRF24.o
-                0x0800503c                NRF::RX_PW_Px_setup(unsigned char, unsigned char)
+                0x0800512c       0x38 Libraries\nrf_lib\NRF24.o
+                0x0800512c                NRF::RX_PW_Px_setup(unsigned char, unsigned char)
  .text._ZN3NRF13FEATURE_setupEh
-                0x08005074       0x30 Libraries\nrf_lib\NRF24.o
-                0x08005074                NRF::FEATURE_setup(unsigned char)
+                0x08005164       0x30 Libraries\nrf_lib\NRF24.o
+                0x08005164                NRF::FEATURE_setup(unsigned char)
  .text._ZN3NRF11DYNPD_setupEh
-                0x080050a4       0x30 Libraries\nrf_lib\NRF24.o
-                0x080050a4                NRF::DYNPD_setup(unsigned char)
+                0x08005194       0x30 Libraries\nrf_lib\NRF24.o
+                0x08005194                NRF::DYNPD_setup(unsigned char)
  .text._ZN3NRF10DATA_READYEv
-                0x080050d4       0x40 Libraries\nrf_lib\NRF24.o
-                0x080050d4                NRF::DATA_READY()
+                0x080051c4       0x78 Libraries\nrf_lib\NRF24.o
+                0x080051c4                NRF::DATA_READY()
  .text._ZN3NRF12start_listenEv
-                0x08005114       0x18 Libraries\nrf_lib\NRF24.o
-                0x08005114                NRF::start_listen()
+                0x0800523c       0x18 Libraries\nrf_lib\NRF24.o
+                0x0800523c                NRF::start_listen()
  .text._ZN3NRF7RECEIVEEPh
-                0x0800512c       0x90 Libraries\nrf_lib\NRF24.o
-                0x0800512c                NRF::RECEIVE(unsigned char*)
+                0x08005254       0x90 Libraries\nrf_lib\NRF24.o
+                0x08005254                NRF::RECEIVE(unsigned char*)
  .text._ZN3NRF12READ_RX_FIFOEPh
-                0x080051bc       0xd0 Libraries\nrf_lib\NRF24.o
-                0x080051bc                NRF::READ_RX_FIFO(unsigned char*)
+                0x080052e4       0xd0 Libraries\nrf_lib\NRF24.o
+                0x080052e4                NRF::READ_RX_FIFO(unsigned char*)
  .text._ZN3NRF20GET_PIPE_FOR_READINGEv
-                0x0800528c       0x24 Libraries\nrf_lib\NRF24.o
-                0x0800528c                NRF::GET_PIPE_FOR_READING()
+                0x080053b4       0x24 Libraries\nrf_lib\NRF24.o
+                0x080053b4                NRF::GET_PIPE_FOR_READING()
  .text._ZN3NRF12RX_configureEv
-                0x080052b0       0x64 Libraries\nrf_lib\NRF24.o
-                0x080052b0                NRF::RX_configure()
+                0x080053d8       0x64 Libraries\nrf_lib\NRF24.o
+                0x080053d8                NRF::RX_configure()
  .text._ZN3NRF12RX_configureEP13config_Struct
-                0x08005314       0xfc Libraries\nrf_lib\NRF24.o
-                0x08005314                NRF::RX_configure(config_Struct*)
+                0x0800543c      0x140 Libraries\nrf_lib\NRF24.o
+                0x0800543c                NRF::RX_configure(config_Struct*)
  .text._Z21TimingDelay_Decrementv
-                0x08005410       0x30 Libraries\nrf_lib\CONFIG.o
-                0x08005410                TimingDelay_Decrement()
+                0x0800557c       0x30 Libraries\nrf_lib\CONFIG.o
+                0x0800557c                TimingDelay_Decrement()
  .text.SysTick_Handler
-                0x08005440        0xc Libraries\nrf_lib\CONFIG.o
-                0x08005440                SysTick_Handler
+                0x080055ac        0xc Libraries\nrf_lib\CONFIG.o
+                0x080055ac                SysTick_Handler
  .text._Z8Delay_usm
-                0x0800544c       0x34 Libraries\nrf_lib\CONFIG.o
-                0x0800544c                Delay_us(unsigned long)
+                0x080055b8       0x34 Libraries\nrf_lib\CONFIG.o
+                0x080055b8                Delay_us(unsigned long)
  .text._Z8Delay_msm
-                0x08005480       0x24 Libraries\nrf_lib\CONFIG.o
-                0x08005480                Delay_ms(unsigned long)
+                0x080055ec       0x24 Libraries\nrf_lib\CONFIG.o
+                0x080055ec                Delay_ms(unsigned long)
  .text._Z14GPIO_Clock_CmdP12GPIO_TypeDef15FunctionalState
-                0x080054a4      0x13c Libraries\nrf_lib\CONFIG.o
-                0x080054a4                GPIO_Clock_Cmd(GPIO_TypeDef*, FunctionalState)
+                0x08005610      0x13c Libraries\nrf_lib\CONFIG.o
+                0x08005610                GPIO_Clock_Cmd(GPIO_TypeDef*, FunctionalState)
  .text._Z13SPI_Clock_CmdP11SPI_TypeDef15FunctionalState
-                0x080055e0       0xe8 Libraries\nrf_lib\CONFIG.o
-                0x080055e0                SPI_Clock_Cmd(SPI_TypeDef*, FunctionalState)
+                0x0800574c       0xe8 Libraries\nrf_lib\CONFIG.o
+                0x0800574c                SPI_Clock_Cmd(SPI_TypeDef*, FunctionalState)
  .text._Z14GPIO_PinSourcet
-                0x080056c8       0xd4 Libraries\nrf_lib\CONFIG.o
-                0x080056c8                GPIO_PinSource(unsigned short)
+                0x08005834       0xd4 Libraries\nrf_lib\CONFIG.o
+                0x08005834                GPIO_PinSource(unsigned short)
  .text._Z12GPIO_AF_SPIxP11SPI_TypeDef
-                0x0800579c       0xa8 Libraries\nrf_lib\CONFIG.o
-                0x0800579c                GPIO_AF_SPIx(SPI_TypeDef*)
+                0x08005908       0xa8 Libraries\nrf_lib\CONFIG.o
+                0x08005908                GPIO_AF_SPIx(SPI_TypeDef*)
  .text._Z10EXTIx_IRQnt
-                0x08005844       0xd4 Libraries\nrf_lib\CONFIG.o
-                0x08005844                EXTIx_IRQn(unsigned short)
+                0x080059b0       0xd4 Libraries\nrf_lib\CONFIG.o
+                0x080059b0                EXTIx_IRQn(unsigned short)
  .text._Z9EXTI_Linet
-                0x08005918       0xe0 Libraries\nrf_lib\CONFIG.o
-                0x08005918                EXTI_Line(unsigned short)
+                0x08005a84       0xe0 Libraries\nrf_lib\CONFIG.o
+                0x08005a84                EXTI_Line(unsigned short)
  .text._Z15EXTI_PortSourceP12GPIO_TypeDef
-                0x080059f8       0xf0 Libraries\nrf_lib\CONFIG.o
-                0x080059f8                EXTI_PortSource(GPIO_TypeDef*)
+                0x08005b64       0xf0 Libraries\nrf_lib\CONFIG.o
+                0x08005b64                EXTI_PortSource(GPIO_TypeDef*)
  .text._Z14EXTI_PinSourcet
-                0x08005ae8       0xd0 Libraries\nrf_lib\CONFIG.o
-                0x08005ae8                EXTI_PinSource(unsigned short)
+                0x08005c54       0xd0 Libraries\nrf_lib\CONFIG.o
+                0x08005c54                EXTI_PinSource(unsigned short)
  .text.SYSCFG_EXTILineConfig
-                0x08005bb8       0x84 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
-                0x08005bb8                SYSCFG_EXTILineConfig
+                0x08005d24       0x84 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+                0x08005d24                SYSCFG_EXTILineConfig
  .text.SPI_Init
-                0x08005c3c       0x88 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
-                0x08005c3c                SPI_Init
- .text.SPI_Cmd  0x08005cc4       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
-                0x08005cc4                SPI_Cmd
+                0x08005da8       0x88 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+                0x08005da8                SPI_Init
+ .text.SPI_Cmd  0x08005e30       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+                0x08005e30                SPI_Cmd
  .text.SPI_I2S_ReceiveData
-                0x08005d04       0x1c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
-                0x08005d04                SPI_I2S_ReceiveData
+                0x08005e70       0x1c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+                0x08005e70                SPI_I2S_ReceiveData
  .text.SPI_I2S_SendData
-                0x08005d20       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
-                0x08005d20                SPI_I2S_SendData
+                0x08005e8c       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+                0x08005e8c                SPI_I2S_SendData
  .text.SPI_I2S_GetFlagStatus
-                0x08005d40       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
-                0x08005d40                SPI_I2S_GetFlagStatus
+                0x08005eac       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+                0x08005eac                SPI_I2S_GetFlagStatus
  .text.RCC_AHB1PeriphClockCmd
-                0x08005d78       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
-                0x08005d78                RCC_AHB1PeriphClockCmd
+                0x08005ee4       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+                0x08005ee4                RCC_AHB1PeriphClockCmd
  .text.RCC_AHB2PeriphClockCmd
-                0x08005db8       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
-                0x08005db8                RCC_AHB2PeriphClockCmd
+                0x08005f24       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+                0x08005f24                RCC_AHB2PeriphClockCmd
  .text.RCC_APB1PeriphClockCmd
-                0x08005df8       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
-                0x08005df8                RCC_APB1PeriphClockCmd
+                0x08005f64       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+                0x08005f64                RCC_APB1PeriphClockCmd
  .text.RCC_APB2PeriphClockCmd
-                0x08005e38       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
-                0x08005e38                RCC_APB2PeriphClockCmd
+                0x08005fa4       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+                0x08005fa4                RCC_APB2PeriphClockCmd
  .text.RCC_APB1PeriphResetCmd
-                0x08005e78       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
-                0x08005e78                RCC_APB1PeriphResetCmd
+                0x08005fe4       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+                0x08005fe4                RCC_APB1PeriphResetCmd
  .text.GPIO_Init
-                0x08005eb8      0x11c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
-                0x08005eb8                GPIO_Init
+                0x08006024      0x11c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+                0x08006024                GPIO_Init
  .text.GPIO_ReadInputDataBit
-                0x08005fd4       0x34 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
-                0x08005fd4                GPIO_ReadInputDataBit
+                0x08006140       0x34 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+                0x08006140                GPIO_ReadInputDataBit
  .text.GPIO_SetBits
-                0x08006008       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
-                0x08006008                GPIO_SetBits
+                0x08006174       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+                0x08006174                GPIO_SetBits
  .text.GPIO_ResetBits
-                0x08006028       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
-                0x08006028                GPIO_ResetBits
+                0x08006194       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+                0x08006194                GPIO_ResetBits
  .text.GPIO_PinAFConfig
-                0x08006048       0x94 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
-                0x08006048                GPIO_PinAFConfig
+                0x080061b4       0x94 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+                0x080061b4                GPIO_PinAFConfig
  .text.EXTI_Init
-                0x080060dc       0xe4 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
-                0x080060dc                EXTI_Init
+                0x08006248       0xe4 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+                0x08006248                EXTI_Init
  .text.EXTI_GetITStatus
-                0x080061c0       0x48 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
-                0x080061c0                EXTI_GetITStatus
+                0x0800632c       0x48 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+                0x0800632c                EXTI_GetITStatus
  .text.EXTI_ClearITPendingBit
-                0x08006208       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
-                0x08006208                EXTI_ClearITPendingBit
+                0x08006374       0x20 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+                0x08006374                EXTI_ClearITPendingBit
  .text.DMA_Init
-                0x08006228       0xb0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
-                0x08006228                DMA_Init
- .text.DMA_Cmd  0x080062d8       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
-                0x080062d8                DMA_Cmd
+                0x08006394       0xb0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+                0x08006394                DMA_Init
+ .text.DMA_Cmd  0x08006444       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+                0x08006444                DMA_Cmd
  .text.DMA_GetCmdStatus
-                0x08006310       0x30 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
-                0x08006310                DMA_GetCmdStatus
+                0x0800647c       0x30 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+                0x0800647c                DMA_GetCmdStatus
  .text.DMA_GetFlagStatus
-                0x08006340       0x78 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
-                0x08006340                DMA_GetFlagStatus
+                0x080064ac       0x78 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+                0x080064ac                DMA_GetFlagStatus
  .text.DMA_ClearFlag
-                0x080063b8       0x5c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
-                0x080063b8                DMA_ClearFlag
+                0x08006524       0x5c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+                0x08006524                DMA_ClearFlag
  .text.DAC_SetChannel1Data
-                0x08006414       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
-                0x08006414                DAC_SetChannel1Data
+                0x08006580       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+                0x08006580                DAC_SetChannel1Data
  .text.NVIC_PriorityGroupConfig
-                0x0800644c       0x28 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
-                0x0800644c                NVIC_PriorityGroupConfig
+                0x080065b8       0x28 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+                0x080065b8                NVIC_PriorityGroupConfig
  .text.NVIC_Init
-                0x08006474       0xc4 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
-                0x08006474                NVIC_Init
+                0x080065e0       0xc4 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+                0x080065e0                NVIC_Init
  .text.__cxa_pure_virtual
-                0x08006538        0x6 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(pure.o)
-                0x08006538                __cxa_pure_virtual
+                0x080066a4        0x6 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(pure.o)
+                0x080066a4                __cxa_pure_virtual
  .text._ZN10__cxxabiv111__terminateEPFvvE
-                0x0800653e        0x8 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
-                0x0800653e                __cxxabiv1::__terminate(void (*)())
- *fill*         0x08006546        0x2 
+                0x080066aa        0x8 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
+                0x080066aa                __cxxabiv1::__terminate(void (*)())
+ *fill*         0x080066b2        0x2 
  .text._ZSt13get_terminatev
-                0x08006548       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
-                0x08006548                std::get_terminate()
+                0x080066b4       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
+                0x080066b4                std::get_terminate()
  .text._ZSt9terminatev
-                0x08006558        0xa c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
-                0x08006558                std::terminate()
- .text.abort    0x08006562        0xe c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-abort.o)
-                0x08006562                abort
+                0x080066c4        0xa c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
+                0x080066c4                std::terminate()
+ .text.abort    0x080066ce        0xe c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-abort.o)
+                0x080066ce                abort
  .text.__libc_init_array
-                0x08006570       0x4c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-init.o)
-                0x08006570                __libc_init_array
+                0x080066dc       0x4c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-init.o)
+                0x080066dc                __libc_init_array
  .text._raise_r
-                0x080065bc       0x54 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signal.o)
-                0x080065bc                _raise_r
- .text.raise    0x08006610       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signal.o)
-                0x08006610                raise
- .text._kill_r  0x08006620       0x24 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signalr.o)
-                0x08006620                _kill_r
+                0x08006728       0x54 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signal.o)
+                0x08006728                _raise_r
+ .text.raise    0x0800677c       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signal.o)
+                0x0800677c                raise
+ .text._kill_r  0x0800678c       0x24 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signalr.o)
+                0x0800678c                _kill_r
  .text._getpid_r
-                0x08006644        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signalr.o)
-                0x08006644                _getpid_r
- .text._getpid  0x08006648       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(getpid.o)
-                0x08006648                _getpid
- .text._kill    0x08006658       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(kill.o)
-                0x08006658                _kill
- .text._exit    0x08006668        0x2 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(_exit.o)
-                0x08006668                _exit
+                0x080067b0        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signalr.o)
+                0x080067b0                _getpid_r
+ .text._getpid  0x080067b4       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(getpid.o)
+                0x080067b4                _getpid
+ .text._kill    0x080067c4       0x10 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(kill.o)
+                0x080067c4                _kill
+ .text._exit    0x080067d4        0x2 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(_exit.o)
+                0x080067d4                _exit
  *(.glue_7)
- .glue_7        0x0800666a        0x0 linker stubs
+ .glue_7        0x080067d6        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0800666a        0x0 linker stubs
+ .glue_7t       0x080067d6        0x0 linker stubs
  *(.eh_frame)
- *fill*         0x0800666a        0x2 
- .eh_frame      0x0800666c        0x0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
+ *fill*         0x080067d6        0x2 
+ .eh_frame      0x080067d8        0x0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
  *(.init)
- .init          0x0800666c        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crti.o
-                0x0800666c                _init
- .init          0x08006670        0x8 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtn.o
+ .init          0x080067d8        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crti.o
+                0x080067d8                _init
+ .init          0x080067dc        0x8 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtn.o
  *(.fini)
- .fini          0x08006678        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crti.o
-                0x08006678                _fini
- .fini          0x0800667c        0x8 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtn.o
-                0x08006684                . = ALIGN (0x4)
-                0x08006684                _etext = .
+ .fini          0x080067e4        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crti.o
+                0x080067e4                _fini
+ .fini          0x080067e8        0x8 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtn.o
+                0x080067f0                . = ALIGN (0x4)
+                0x080067f0                _etext = .
 
-.vfp11_veneer   0x08006684        0x0
- .vfp11_veneer  0x08006684        0x0 linker stubs
+.vfp11_veneer   0x080067f0        0x0
+ .vfp11_veneer  0x080067f0        0x0 linker stubs
 
-.v4_bx          0x08006684        0x0
- .v4_bx         0x08006684        0x0 linker stubs
+.v4_bx          0x080067f0        0x0
+ .v4_bx         0x080067f0        0x0 linker stubs
 
-.iplt           0x08006684        0x0
- .iplt          0x08006684        0x0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
+.iplt           0x080067f0        0x0
+ .iplt          0x080067f0        0x0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
 
-.rodata         0x08006684       0xdc
-                0x08006684                . = ALIGN (0x4)
+.rodata         0x080067f0       0xdc
+                0x080067f0                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x08006684       0x96 Libraries\usb_conf\usbd_desc.o
- *fill*         0x0800671a        0x2 
- .rodata        0x0800671c        0x5 Libraries\nrf_lib\NRF24.o
+ .rodata        0x080067f0       0x96 Libraries\usb_conf\usbd_desc.o
+ *fill*         0x08006886        0x2 
+ .rodata        0x08006888        0x5 Libraries\nrf_lib\NRF24.o
  *(.rodata*)
- *fill*         0x08006721        0x3 
+ *fill*         0x0800688d        0x3 
  .rodata.GPIO_PIN
-                0x08006724        0x8 Utilities\STM32F4-Discovery\stm32f4_discovery.o
-                0x08006724                GPIO_PIN
+                0x08006890        0x8 Utilities\STM32F4-Discovery\stm32f4_discovery.o
+                0x08006890                GPIO_PIN
  .rodata.GPIO_CLK
-                0x0800672c       0x10 Utilities\STM32F4-Discovery\stm32f4_discovery.o
-                0x0800672c                GPIO_CLK
+                0x08006898       0x10 Utilities\STM32F4-Discovery\stm32f4_discovery.o
+                0x08006898                GPIO_CLK
  .rodata._ZTV16NRF_REGISTER_MAP
-                0x0800673c       0x10 Libraries\nrf_lib\NRF_REGISTER_MAP.o
-                0x0800673c                vtable for NRF_REGISTER_MAP
+                0x080068a8       0x10 Libraries\nrf_lib\NRF_REGISTER_MAP.o
+                0x080068a8                vtable for NRF_REGISTER_MAP
  .rodata._ZTV3NRF
-                0x0800674c       0x10 Libraries\nrf_lib\NRF24.o
-                0x0800674c                vtable for NRF
+                0x080068b8       0x10 Libraries\nrf_lib\NRF24.o
+                0x080068b8                vtable for NRF
  .rodata.str1.1
-                0x0800675c        0x2 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-impure.o)
-                0x08006760                . = ALIGN (0x4)
- *fill*         0x0800675e        0x2 
+                0x080068c8        0x2 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-impure.o)
+                0x080068cc                . = ALIGN (0x4)
+ *fill*         0x080068ca        0x2 
 
-.rel.dyn        0x08006760        0x0
- .rel.iplt      0x08006760        0x0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
+.rel.dyn        0x080068cc        0x0
+ .rel.iplt      0x080068cc        0x0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08006760        0x0
-                0x08006760                __exidx_start = .
+.ARM            0x080068cc        0x0
+                0x080068cc                __exidx_start = .
  *(.ARM.exidx*)
-                0x08006760                __exidx_end = .
+                0x080068cc                __exidx_end = .
 
-.preinit_array  0x08006760        0x0
-                0x08006760                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x080068cc        0x0
+                0x080068cc                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x08006760                PROVIDE (__preinit_array_end, .)
+                0x080068cc                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x08006760        0x4
-                0x08006760                PROVIDE (__init_array_start, .)
+.init_array     0x080068cc        0x4
+                0x080068cc                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x08006760        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
-                0x08006764                PROVIDE (__init_array_end, .)
+ .init_array    0x080068cc        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
+                0x080068d0                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08006764        0x4
+.fini_array     0x080068d0        0x4
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08006764        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
+ .fini_array    0x080068d0        0x4 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
                 [!provide]                PROVIDE (__fini_array_end, .)
-                0x08006768                _sidata = LOADADDR (.data)
+                0x080068d4                _sidata = LOADADDR (.data)
 
-.data           0x20000000      0x19c load address 0x08006768
+.data           0x20000000      0x19c load address 0x080068d4
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -3028,12 +3033,12 @@ LOAD c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib
                 0x20000198                _impure_ptr
                 0x2000019c                . = ALIGN (0x4)
                 0x2000019c                _edata = .
-                0x08006904                _siccmram = LOADADDR (.ccmram)
+                0x08006a70                _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x2000019c        0x0 load address 0x08006904
+.igot.plt       0x2000019c        0x0 load address 0x08006a70
  .igot.plt      0x2000019c        0x0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtbegin.o
 
-.ccmram         0x10000000        0x0 load address 0x08006904
+.ccmram         0x10000000        0x0 load address 0x08006a70
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _sccmram = .
  *(.ccmram)
@@ -3229,7 +3234,7 @@ LOAD c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib
                 0x0000095c       0x22 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/fpu/crtn.o
 OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
 
-.debug_info     0x00000000    0x149dc
+.debug_info     0x00000000    0x14b1f
  .debug_info    0x00000000      0x5d6 src\system_stm32f4xx.o
  .debug_info    0x000005d6      0x122 src\stm32f4xx_it.o
  .debug_info    0x000006f8       0x93 src\startup_stm32f40xx.o
@@ -3247,21 +3252,21 @@ OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
  .debug_info    0x0000c7f9      0x1cf Libraries\usb_conf\usbd_usr.o
  .debug_info    0x0000c9c8      0x367 Libraries\usb_conf\usbd_desc.o
  .debug_info    0x0000cd2f     0x1031 Libraries\usb_conf\usb_bsp.o
- .debug_info    0x0000dd60      0xa09 Libraries\nrf_lib\SPI_interface.o
- .debug_info    0x0000e769      0x2a0 Libraries\nrf_lib\REGISTER.o
- .debug_info    0x0000ea09      0x4af Libraries\nrf_lib\NRF_REGISTER_MAP.o
- .debug_info    0x0000eeb8     0x1bcc Libraries\nrf_lib\NRF24.o
- .debug_info    0x00010a84      0x8dc Libraries\nrf_lib\CONFIG.o
- .debug_info    0x00011360      0x278 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
- .debug_info    0x000115d8      0xb13 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
- .debug_info    0x000120eb      0xc8d Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
- .debug_info    0x00012d78      0x621 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
- .debug_info    0x00013399      0x35b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
- .debug_info    0x000136f4      0x745 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
- .debug_info    0x00013e39      0x649 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
- .debug_info    0x00014482      0x55a Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+ .debug_info    0x0000dd60      0xa64 Libraries\nrf_lib\SPI_interface.o
+ .debug_info    0x0000e7c4      0x2a0 Libraries\nrf_lib\REGISTER.o
+ .debug_info    0x0000ea64      0x4af Libraries\nrf_lib\NRF_REGISTER_MAP.o
+ .debug_info    0x0000ef13     0x1cb4 Libraries\nrf_lib\NRF24.o
+ .debug_info    0x00010bc7      0x8dc Libraries\nrf_lib\CONFIG.o
+ .debug_info    0x000114a3      0x278 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+ .debug_info    0x0001171b      0xb13 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+ .debug_info    0x0001222e      0xc8d Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+ .debug_info    0x00012ebb      0x621 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+ .debug_info    0x000134dc      0x35b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+ .debug_info    0x00013837      0x745 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+ .debug_info    0x00013f7c      0x649 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+ .debug_info    0x000145c5      0x55a Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
 
-.debug_abbrev   0x00000000     0x36f1
+.debug_abbrev   0x00000000     0x36e2
  .debug_abbrev  0x00000000      0x13a src\system_stm32f4xx.o
  .debug_abbrev  0x0000013a       0x67 src\stm32f4xx_it.o
  .debug_abbrev  0x000001a1       0x12 src\startup_stm32f40xx.o
@@ -3279,21 +3284,21 @@ OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
  .debug_abbrev  0x00001a59       0xdf Libraries\usb_conf\usbd_usr.o
  .debug_abbrev  0x00001b38      0x12e Libraries\usb_conf\usbd_desc.o
  .debug_abbrev  0x00001c66      0x23c Libraries\usb_conf\usb_bsp.o
- .debug_abbrev  0x00001ea2      0x256 Libraries\nrf_lib\SPI_interface.o
- .debug_abbrev  0x000020f8      0x18a Libraries\nrf_lib\REGISTER.o
- .debug_abbrev  0x00002282      0x23c Libraries\nrf_lib\NRF_REGISTER_MAP.o
- .debug_abbrev  0x000024be      0x425 Libraries\nrf_lib\NRF24.o
- .debug_abbrev  0x000028e3      0x211 Libraries\nrf_lib\CONFIG.o
- .debug_abbrev  0x00002af4      0x135 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
- .debug_abbrev  0x00002c29      0x16b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
- .debug_abbrev  0x00002d94      0x1e7 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
- .debug_abbrev  0x00002f7b      0x1a9 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
- .debug_abbrev  0x00003124      0x1ab Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
- .debug_abbrev  0x000032cf      0x159 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
- .debug_abbrev  0x00003428      0x180 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
- .debug_abbrev  0x000035a8      0x149 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+ .debug_abbrev  0x00001ea2      0x247 Libraries\nrf_lib\SPI_interface.o
+ .debug_abbrev  0x000020e9      0x18a Libraries\nrf_lib\REGISTER.o
+ .debug_abbrev  0x00002273      0x23c Libraries\nrf_lib\NRF_REGISTER_MAP.o
+ .debug_abbrev  0x000024af      0x425 Libraries\nrf_lib\NRF24.o
+ .debug_abbrev  0x000028d4      0x211 Libraries\nrf_lib\CONFIG.o
+ .debug_abbrev  0x00002ae5      0x135 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+ .debug_abbrev  0x00002c1a      0x16b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+ .debug_abbrev  0x00002d85      0x1e7 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+ .debug_abbrev  0x00002f6c      0x1a9 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+ .debug_abbrev  0x00003115      0x1ab Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+ .debug_abbrev  0x000032c0      0x159 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+ .debug_abbrev  0x00003419      0x180 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+ .debug_abbrev  0x00003599      0x149 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
 
-.debug_aranges  0x00000000      0xfa8
+.debug_aranges  0x00000000      0xfb8
  .debug_aranges
                 0x00000000       0x30 src\system_stm32f4xx.o
  .debug_aranges
@@ -3329,33 +3334,33 @@ OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
  .debug_aranges
                 0x000007c0       0x48 Libraries\usb_conf\usb_bsp.o
  .debug_aranges
-                0x00000808       0x78 Libraries\nrf_lib\SPI_interface.o
+                0x00000808       0x80 Libraries\nrf_lib\SPI_interface.o
  .debug_aranges
-                0x00000880       0x40 Libraries\nrf_lib\REGISTER.o
+                0x00000888       0x40 Libraries\nrf_lib\REGISTER.o
  .debug_aranges
-                0x000008c0       0x28 Libraries\nrf_lib\NRF_REGISTER_MAP.o
+                0x000008c8       0x28 Libraries\nrf_lib\NRF_REGISTER_MAP.o
  .debug_aranges
-                0x000008e8      0x120 Libraries\nrf_lib\NRF24.o
+                0x000008f0      0x128 Libraries\nrf_lib\NRF24.o
  .debug_aranges
-                0x00000a08       0x88 Libraries\nrf_lib\CONFIG.o
+                0x00000a18       0x88 Libraries\nrf_lib\CONFIG.o
  .debug_aranges
-                0x00000a90       0x48 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+                0x00000aa0       0x48 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
  .debug_aranges
-                0x00000ad8       0xe0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+                0x00000ae8       0xe0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
  .debug_aranges
-                0x00000bb8      0x180 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+                0x00000bc8      0x180 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
  .debug_aranges
-                0x00000d38       0x88 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+                0x00000d48       0x88 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
  .debug_aranges
-                0x00000dc0       0x58 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+                0x00000dd0       0x58 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
  .debug_aranges
-                0x00000e18       0xb0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+                0x00000e28       0xb0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
  .debug_aranges
-                0x00000ec8       0xa0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+                0x00000ed8       0xa0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
  .debug_aranges
-                0x00000f68       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+                0x00000f78       0x40 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
 
-.debug_ranges   0x00000000      0xdd0
+.debug_ranges   0x00000000      0xde0
  .debug_ranges  0x00000000       0x20 src\system_stm32f4xx.o
  .debug_ranges  0x00000020       0x48 src\stm32f4xx_it.o
  .debug_ranges  0x00000068       0x20 src\startup_stm32f40xx.o
@@ -3373,53 +3378,53 @@ OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
  .debug_ranges  0x00000648       0x40 Libraries\usb_conf\usbd_usr.o
  .debug_ranges  0x00000688       0x40 Libraries\usb_conf\usbd_desc.o
  .debug_ranges  0x000006c8       0x38 Libraries\usb_conf\usb_bsp.o
- .debug_ranges  0x00000700       0x68 Libraries\nrf_lib\SPI_interface.o
- .debug_ranges  0x00000768       0x30 Libraries\nrf_lib\REGISTER.o
- .debug_ranges  0x00000798       0x18 Libraries\nrf_lib\NRF_REGISTER_MAP.o
- .debug_ranges  0x000007b0      0x110 Libraries\nrf_lib\NRF24.o
- .debug_ranges  0x000008c0       0x78 Libraries\nrf_lib\CONFIG.o
- .debug_ranges  0x00000938       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
- .debug_ranges  0x00000970       0xd0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
- .debug_ranges  0x00000a40      0x170 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
- .debug_ranges  0x00000bb0       0x78 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
- .debug_ranges  0x00000c28       0x48 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
- .debug_ranges  0x00000c70       0xa0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
- .debug_ranges  0x00000d10       0x90 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
- .debug_ranges  0x00000da0       0x30 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+ .debug_ranges  0x00000700       0x70 Libraries\nrf_lib\SPI_interface.o
+ .debug_ranges  0x00000770       0x30 Libraries\nrf_lib\REGISTER.o
+ .debug_ranges  0x000007a0       0x18 Libraries\nrf_lib\NRF_REGISTER_MAP.o
+ .debug_ranges  0x000007b8      0x118 Libraries\nrf_lib\NRF24.o
+ .debug_ranges  0x000008d0       0x78 Libraries\nrf_lib\CONFIG.o
+ .debug_ranges  0x00000948       0x38 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+ .debug_ranges  0x00000980       0xd0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+ .debug_ranges  0x00000a50      0x170 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+ .debug_ranges  0x00000bc0       0x78 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+ .debug_ranges  0x00000c38       0x48 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+ .debug_ranges  0x00000c80       0xa0 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+ .debug_ranges  0x00000d20       0x90 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+ .debug_ranges  0x00000db0       0x30 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
 
-.debug_line     0x00000000     0x66eb
+.debug_line     0x00000000     0x671b
  .debug_line    0x00000000      0x1ff src\system_stm32f4xx.o
  .debug_line    0x000001ff      0x1d6 src\stm32f4xx_it.o
  .debug_line    0x000003d5       0x7a src\startup_stm32f40xx.o
- .debug_line    0x0000044f      0x588 src\main.o
- .debug_line    0x000009d7      0x6c7 Utilities\STM32F4-Discovery\stm32f4_discovery_audio_codec.o
- .debug_line    0x0000109e      0x28a Utilities\STM32F4-Discovery\stm32f4_discovery.o
- .debug_line    0x00001328      0x39a Libraries\usb_lib\otg\usb_dcd_int.o
- .debug_line    0x000016c2      0x325 Libraries\usb_lib\otg\usb_dcd.o
- .debug_line    0x000019e7      0x6da Libraries\usb_lib\otg\usb_core.o
- .debug_line    0x000020c1      0x447 Libraries\usb_lib\core\usbd_req.o
- .debug_line    0x00002508      0x273 Libraries\usb_lib\core\usbd_ioreq.o
- .debug_line    0x0000277b      0x35f Libraries\usb_lib\core\usbd_core.o
- .debug_line    0x00002ada      0x348 Libraries\usb_lib\cdc\usbd_cdc_vcp.o
- .debug_line    0x00002e22      0x34f Libraries\usb_lib\cdc\usbd_cdc_core.o
- .debug_line    0x00003171      0x235 Libraries\usb_conf\usbd_usr.o
- .debug_line    0x000033a6      0x259 Libraries\usb_conf\usbd_desc.o
- .debug_line    0x000035ff      0x2d5 Libraries\usb_conf\usb_bsp.o
- .debug_line    0x000038d4      0x342 Libraries\nrf_lib\SPI_interface.o
- .debug_line    0x00003c16      0x1c2 Libraries\nrf_lib\REGISTER.o
- .debug_line    0x00003dd8      0x2b1 Libraries\nrf_lib\NRF_REGISTER_MAP.o
- .debug_line    0x00004089      0x67f Libraries\nrf_lib\NRF24.o
- .debug_line    0x00004708      0x40f Libraries\nrf_lib\CONFIG.o
- .debug_line    0x00004b17      0x214 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
- .debug_line    0x00004d2b      0x46b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
- .debug_line    0x00005196      0x5b3 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
- .debug_line    0x00005749      0x35b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
- .debug_line    0x00005aa4      0x29c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
- .debug_line    0x00005d40      0x425 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
- .debug_line    0x00006165      0x34d Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
- .debug_line    0x000064b2      0x239 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+ .debug_line    0x0000044f      0x58a src\main.o
+ .debug_line    0x000009d9      0x6c7 Utilities\STM32F4-Discovery\stm32f4_discovery_audio_codec.o
+ .debug_line    0x000010a0      0x28a Utilities\STM32F4-Discovery\stm32f4_discovery.o
+ .debug_line    0x0000132a      0x39a Libraries\usb_lib\otg\usb_dcd_int.o
+ .debug_line    0x000016c4      0x325 Libraries\usb_lib\otg\usb_dcd.o
+ .debug_line    0x000019e9      0x6da Libraries\usb_lib\otg\usb_core.o
+ .debug_line    0x000020c3      0x447 Libraries\usb_lib\core\usbd_req.o
+ .debug_line    0x0000250a      0x273 Libraries\usb_lib\core\usbd_ioreq.o
+ .debug_line    0x0000277d      0x35f Libraries\usb_lib\core\usbd_core.o
+ .debug_line    0x00002adc      0x348 Libraries\usb_lib\cdc\usbd_cdc_vcp.o
+ .debug_line    0x00002e24      0x34f Libraries\usb_lib\cdc\usbd_cdc_core.o
+ .debug_line    0x00003173      0x235 Libraries\usb_conf\usbd_usr.o
+ .debug_line    0x000033a8      0x259 Libraries\usb_conf\usbd_desc.o
+ .debug_line    0x00003601      0x2d5 Libraries\usb_conf\usb_bsp.o
+ .debug_line    0x000038d6      0x33e Libraries\nrf_lib\SPI_interface.o
+ .debug_line    0x00003c14      0x1c2 Libraries\nrf_lib\REGISTER.o
+ .debug_line    0x00003dd6      0x2b1 Libraries\nrf_lib\NRF_REGISTER_MAP.o
+ .debug_line    0x00004087      0x6b1 Libraries\nrf_lib\NRF24.o
+ .debug_line    0x00004738      0x40f Libraries\nrf_lib\CONFIG.o
+ .debug_line    0x00004b47      0x214 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+ .debug_line    0x00004d5b      0x46b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+ .debug_line    0x000051c6      0x5b3 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+ .debug_line    0x00005779      0x35b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+ .debug_line    0x00005ad4      0x29c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+ .debug_line    0x00005d70      0x425 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+ .debug_line    0x00006195      0x34d Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+ .debug_line    0x000064e2      0x239 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
 
-.debug_str      0x00000000     0x59ac
+.debug_str      0x00000000     0x5a0c
  .debug_str     0x00000000      0x399 src\system_stm32f4xx.o
                                 0x416 (size before relaxing)
  .debug_str     0x00000399       0x96 src\stm32f4xx_it.o
@@ -3452,31 +3457,31 @@ OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
                                 0x3fa (size before relaxing)
  .debug_str     0x000035e3       0xb0 Libraries\usb_conf\usb_bsp.o
                                0x1148 (size before relaxing)
- .debug_str     0x00003693      0x33b Libraries\nrf_lib\SPI_interface.o
-                                0x801 (size before relaxing)
- .debug_str     0x000039ce       0xde Libraries\nrf_lib\REGISTER.o
+ .debug_str     0x00003693      0x374 Libraries\nrf_lib\SPI_interface.o
+                                0x83a (size before relaxing)
+ .debug_str     0x00003a07       0xde Libraries\nrf_lib\REGISTER.o
                                 0x309 (size before relaxing)
- .debug_str     0x00003aac      0x214 Libraries\nrf_lib\NRF_REGISTER_MAP.o
+ .debug_str     0x00003ae5      0x214 Libraries\nrf_lib\NRF_REGISTER_MAP.o
                                 0x509 (size before relaxing)
- .debug_str     0x00003cc0      0x9a2 Libraries\nrf_lib\NRF24.o
-                               0x14b2 (size before relaxing)
- .debug_str     0x00004662      0x21b Libraries\nrf_lib\CONFIG.o
+ .debug_str     0x00003cf9      0x9c9 Libraries\nrf_lib\NRF24.o
+                               0x150f (size before relaxing)
+ .debug_str     0x000046c2      0x21b Libraries\nrf_lib\CONFIG.o
                                 0xc84 (size before relaxing)
- .debug_str     0x0000487d      0x169 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+ .debug_str     0x000048dd      0x169 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
                                 0x378 (size before relaxing)
- .debug_str     0x000049e6      0x295 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+ .debug_str     0x00004a46      0x295 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
                                 0x70e (size before relaxing)
- .debug_str     0x00004c7b      0x56b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+ .debug_str     0x00004cdb      0x56b Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
                                 0x8fd (size before relaxing)
- .debug_str     0x000051e6      0x159 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+ .debug_str     0x00005246      0x159 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
                                 0x527 (size before relaxing)
- .debug_str     0x0000533f       0xf3 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+ .debug_str     0x0000539f       0xf3 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
                                 0x3dd (size before relaxing)
- .debug_str     0x00005432      0x254 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+ .debug_str     0x00005492      0x254 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
                                 0x5c6 (size before relaxing)
- .debug_str     0x00005686      0x220 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+ .debug_str     0x000056e6      0x220 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
                                 0x4d7 (size before relaxing)
- .debug_str     0x000058a6      0x106 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+ .debug_str     0x00005906      0x106 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
                                 0x452 (size before relaxing)
 
 .comment        0x00000000       0x7e
@@ -3511,7 +3516,7 @@ OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
  .comment       0x0000007e       0x7f Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
  .comment       0x0000007e       0x7f Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
 
-.debug_frame    0x00000000     0x409c
+.debug_frame    0x00000000     0x40ec
  .debug_frame   0x00000000       0x7c src\system_stm32f4xx.o
  .debug_frame   0x0000007c       0xf0 src\stm32f4xx_it.o
  .debug_frame   0x0000016c      0x20c src\main.o
@@ -3528,29 +3533,29 @@ OUTPUT(USB+RX_unif_functions.elf elf32-littlearm)
  .debug_frame   0x00001a80       0xf8 Libraries\usb_conf\usbd_usr.o
  .debug_frame   0x00001b78      0x114 Libraries\usb_conf\usbd_desc.o
  .debug_frame   0x00001c8c       0xf4 Libraries\usb_conf\usb_bsp.o
- .debug_frame   0x00001d80      0x1c4 Libraries\nrf_lib\SPI_interface.o
- .debug_frame   0x00001f44       0xd8 Libraries\nrf_lib\REGISTER.o
- .debug_frame   0x0000201c       0x60 Libraries\nrf_lib\NRF_REGISTER_MAP.o
- .debug_frame   0x0000207c      0x50c Libraries\nrf_lib\NRF24.o
- .debug_frame   0x00002588      0x218 Libraries\nrf_lib\CONFIG.o
- .debug_frame   0x000027a0       0xf4 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
- .debug_frame   0x00002894      0x3f4 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
- .debug_frame   0x00002c88      0x6fc Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
- .debug_frame   0x00003384      0x23c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
- .debug_frame   0x000035c0      0x148 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
- .debug_frame   0x00003708      0x308 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
- .debug_frame   0x00003a10      0x2ac Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
- .debug_frame   0x00003cbc       0xd8 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
- .debug_frame   0x00003d94       0x40 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(pure.o)
- .debug_frame   0x00003dd4       0xb0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
- .debug_frame   0x00003e84       0x28 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-abort.o)
- .debug_frame   0x00003eac       0x2c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-init.o)
- .debug_frame   0x00003ed8       0xcc c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signal.o)
- .debug_frame   0x00003fa4       0x3c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signalr.o)
- .debug_frame   0x00003fe0       0x5c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-reent.o)
- .debug_frame   0x0000403c       0x20 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(getpid.o)
- .debug_frame   0x0000405c       0x20 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(kill.o)
- .debug_frame   0x0000407c       0x20 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(_exit.o)
+ .debug_frame   0x00001d80      0x1e8 Libraries\nrf_lib\SPI_interface.o
+ .debug_frame   0x00001f68       0xd8 Libraries\nrf_lib\REGISTER.o
+ .debug_frame   0x00002040       0x60 Libraries\nrf_lib\NRF_REGISTER_MAP.o
+ .debug_frame   0x000020a0      0x538 Libraries\nrf_lib\NRF24.o
+ .debug_frame   0x000025d8      0x218 Libraries\nrf_lib\CONFIG.o
+ .debug_frame   0x000027f0       0xf4 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o
+ .debug_frame   0x000028e4      0x3f4 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o
+ .debug_frame   0x00002cd8      0x6fc Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
+ .debug_frame   0x000033d4      0x23c Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o
+ .debug_frame   0x00003610      0x148 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o
+ .debug_frame   0x00003758      0x308 Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o
+ .debug_frame   0x00003a60      0x2ac Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o
+ .debug_frame   0x00003d0c       0xd8 Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
+ .debug_frame   0x00003de4       0x40 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(pure.o)
+ .debug_frame   0x00003e24       0xb0 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libstdc++_nano.a(eh_terminate.o)
+ .debug_frame   0x00003ed4       0x28 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-abort.o)
+ .debug_frame   0x00003efc       0x2c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00003f28       0xcc c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signal.o)
+ .debug_frame   0x00003ff4       0x3c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-signalr.o)
+ .debug_frame   0x00004030       0x5c c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x0000408c       0x20 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(getpid.o)
+ .debug_frame   0x000040ac       0x20 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(kill.o)
+ .debug_frame   0x000040cc       0x20 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(_exit.o)
 
 .stab           0x00000000       0x3c
  .stab          0x00000000       0x24 c:/program files (x86)/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libnosys.a(getpid.o)
@@ -4133,8 +4138,8 @@ NRF::FEATURE_setup(unsigned char)                 Libraries\nrf_lib\NRF24.o
 NRF::GET_PIPE_FOR_READING()                       Libraries\nrf_lib\NRF24.o
 NRF::IRQ_Pin()                                    src\main.o
 NRF::NRF(GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, SPI_TypeDef*, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short) Libraries\nrf_lib\NRF24.o
-NRF::NRF(GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, SPI_TypeDef*, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short) Libraries\nrf_lib\NRF24.o
                                                   src\main.o
+NRF::NRF(GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, SPI_TypeDef*, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short, GPIO_TypeDef*, unsigned short) Libraries\nrf_lib\NRF24.o
 NRF::READ_RX_FIFO(unsigned char*)                 Libraries\nrf_lib\NRF24.o
 NRF::RECEIVE(unsigned char*)                      Libraries\nrf_lib\NRF24.o
                                                   src\main.o
@@ -4156,6 +4161,7 @@ NRF::TRANSMITTED()                                Libraries\nrf_lib\NRF24.o
 NRF::TX_ADDR_setup(unsigned char*)                Libraries\nrf_lib\NRF24.o
 NRF::TX_configure()                               Libraries\nrf_lib\NRF24.o
 NRF::TX_configure(config_Struct*)                 Libraries\nrf_lib\NRF24.o
+NRF::W_ACK_PAYLOAD(unsigned char, unsigned char*, unsigned char) Libraries\nrf_lib\NRF24.o
 NRF::W_REGISTER(unsigned char, unsigned char, unsigned char*) Libraries\nrf_lib\NRF24.o
 NRF::begin()                                      Libraries\nrf_lib\NRF24.o
 NRF::start_listen()                               Libraries\nrf_lib\NRF24.o
@@ -4164,8 +4170,8 @@ NRF::stdbyI_to_RX(unsigned char)                  Libraries\nrf_lib\NRF24.o
 NRF::stdbyI_to_TX(unsigned char)                  Libraries\nrf_lib\NRF24.o
 NRF::stop_listen()                                Libraries\nrf_lib\NRF24.o
 NRF_REGISTER_MAP::NRF_REGISTER_MAP()              Libraries\nrf_lib\NRF_REGISTER_MAP.o
-NRF_REGISTER_MAP::NRF_REGISTER_MAP()              Libraries\nrf_lib\NRF_REGISTER_MAP.o
                                                   Libraries\nrf_lib\NRF24.o
+NRF_REGISTER_MAP::NRF_REGISTER_MAP()              Libraries\nrf_lib\NRF_REGISTER_MAP.o
 NRF_REGISTER_MAP::REFRESH()                       Libraries\nrf_lib\NRF_REGISTER_MAP.o
 NVIC_Init                                         Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o
                                                   Libraries\nrf_lib\NRF24.o
@@ -4281,8 +4287,8 @@ RCC_SYSCLKConfig                                  Libraries\STM32F4xx_StdPeriph_
 RCC_TIMCLKPresConfig                              Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
 RCC_WaitForHSEStartUp                             Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o
 REGISTER::REGISTER()                              Libraries\nrf_lib\REGISTER.o
-REGISTER::REGISTER()                              Libraries\nrf_lib\REGISTER.o
                                                   Libraries\nrf_lib\NRF_REGISTER_MAP.o
+REGISTER::REGISTER()                              Libraries\nrf_lib\REGISTER.o
 REGISTER::get_address()                           Libraries\nrf_lib\REGISTER.o
                                                   Libraries\nrf_lib\NRF24.o
                                                   Libraries\nrf_lib\NRF_REGISTER_MAP.o
@@ -4395,6 +4401,7 @@ SPI2_IRQHandler                                   src\startup_stm32f40xx.o
 SPI3_IRQHandler                                   Utilities\STM32F4-Discovery\stm32f4_discovery_audio_codec.o
                                                   src\startup_stm32f40xx.o
 SPI::ACTIVATE()                                   Libraries\nrf_lib\SPI_interface.o
+                                                  Libraries\nrf_lib\NRF24.o
 SPI::ASSERT_CS(int)                               Libraries\nrf_lib\SPI_interface.o
                                                   Libraries\nrf_lib\NRF24.o
 SPI::CMD(unsigned char, unsigned char, unsigned char*, unsigned char*) Libraries\nrf_lib\SPI_interface.o
@@ -4408,8 +4415,10 @@ SPI::R_REGISTER(unsigned char, unsigned char, unsigned char*) Libraries\nrf_lib\
 SPI::R_RX_PAYLOAD(unsigned char*)                 Libraries\nrf_lib\SPI_interface.o
 SPI::R_RX_PL_WID()                                Libraries\nrf_lib\SPI_interface.o
 SPI::SPI(SPI_TypeDef*, GPIO_TypeDef*, unsigned short) Libraries\nrf_lib\SPI_interface.o
-                                                  Libraries\nrf_lib\NRF24.o
 SPI::SPI(SPI_TypeDef*, GPIO_TypeDef*, unsigned short) Libraries\nrf_lib\SPI_interface.o
+                                                  Libraries\nrf_lib\NRF24.o
+SPI::W_ACK_PAYLOAD(unsigned char, unsigned char*, unsigned char) Libraries\nrf_lib\SPI_interface.o
+                                                  Libraries\nrf_lib\NRF24.o
 SPI::W_REGISTER(unsigned char, unsigned char, unsigned char*) Libraries\nrf_lib\SPI_interface.o
                                                   Libraries\nrf_lib\NRF24.o
 SPI::W_TX_PAYLOAD(unsigned char*, unsigned char)  Libraries\nrf_lib\SPI_interface.o
