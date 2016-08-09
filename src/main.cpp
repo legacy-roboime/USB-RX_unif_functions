@@ -81,12 +81,13 @@ int main(void)
   //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
 
+  uint8_t ack[]={'h','e','l','l','o'};
+
   /* Infinite loop */
   while (1)
   {
 #ifdef USE_AUTOACK
-/*		static uint8_t ack[]={'h','e','l','l','o'};
-		//radio_ptr->FLUSH_TX();//TODO: seria bom conseguir um jeito de limpar a TX FIFO antes de enviar o ACK
+/*		//radio_ptr->FLUSH_TX();//TODO: seria bom conseguir um jeito de limpar a TX FIFO antes de enviar o ACK
 		radio.W_ACK_PAYLOAD(0,ack,5);*/
 #endif
 /*	  se IRQ=high,led laranja acende e verde fica apagado,

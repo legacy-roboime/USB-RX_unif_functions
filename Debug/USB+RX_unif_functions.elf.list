@@ -23,25 +23,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   9 .ARM.attributes 00000030  00000000  00000000  0002019c  2**0
                   CONTENTS, READONLY
- 10 .debug_info   00014b1f  00000000  00000000  000201cc  2**0
+ 10 .debug_info   00014b2d  00000000  00000000  000201cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_abbrev 000036e2  00000000  00000000  00034ceb  2**0
+ 11 .debug_abbrev 000036f1  00000000  00000000  00034cf9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_aranges 00000fb8  00000000  00000000  000383d0  2**3
+ 12 .debug_aranges 00000fb8  00000000  00000000  000383f0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000de0  00000000  00000000  00039388  2**3
+ 13 .debug_ranges 00000de0  00000000  00000000  000393a8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   0000671b  00000000  00000000  0003a168  2**0
+ 14 .debug_line   000066f1  00000000  00000000  0003a188  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    00005a0c  00000000  00000000  00040883  2**0
+ 15 .debug_str    00005a09  00000000  00000000  00040879  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .comment      0000007e  00000000  00000000  0004628f  2**0
+ 16 .comment      0000007e  00000000  00000000  00046282  2**0
                   CONTENTS, READONLY
- 17 .debug_frame  000040ec  00000000  00000000  00046310  2**2
+ 17 .debug_frame  000040ec  00000000  00000000  00046300  2**2
                   CONTENTS, READONLY, DEBUGGING
- 18 .stab         0000003c  00000000  00000000  0004a3fc  2**2
+ 18 .stab         0000003c  00000000  00000000  0004a3ec  2**2
                   CONTENTS, READONLY, DEBUGGING
- 19 .stabstr      000000ac  00000000  00000000  0004a438  2**0
+ 19 .stabstr      000000ac  00000000  00000000  0004a428  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -846,9 +846,9 @@ int main(void)
 		  STM_EVAL_LEDOn(LED4);
  800056e:	2000      	movs	r0, #0
  8000570:	f000 f9da 	bl	8000928 <STM_EVAL_LEDOn>
-
-  //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
+
+  static uint8_t ack[]={'h','e','l','l','o'};
 
   /* Infinite loop */
   while (1)
