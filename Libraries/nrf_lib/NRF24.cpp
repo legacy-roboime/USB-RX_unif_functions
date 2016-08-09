@@ -370,8 +370,19 @@ uint8_t NRF::SEND(uint8_t* data, uint8_t size){
 void NRF::W_ACK_PAYLOAD(uint8_t pipe,uint8_t* pointer,uint8_t number){
 	if(pipe>5)
 		return;
-	return SPI::W_ACK_PAYLOAD(pipe,pointer,number);
+	SPI::W_ACK_PAYLOAD(pipe,pointer,number);
+	return;
 
+}
+
+void NRF::FLUSH_TX(){
+	SPI::FLUSH_TX();
+	return;
+}
+
+void NRF::FLUSH_RX(){
+	SPI::FLUSH_RX();
+	return;
 }
 
 void NRF::start_listen(){
