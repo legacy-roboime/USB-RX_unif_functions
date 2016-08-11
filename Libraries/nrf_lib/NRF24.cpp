@@ -467,7 +467,7 @@ void NRF::RX_configure(){
 
 #ifdef USE_AUTOACK
 	configuration.ENAA_Px=ENAA_P0;//write 1 in some bit of EN_AA will force high on EN_CRC bit
-	configuration.FEATURE=FEATURE_EN_ACK_PAY|FEATURE_EN_DPL|FEATURE_EN_DYN_ACK;
+	configuration.FEATURE=FEATURE_EN_ACK_PAY|FEATURE_EN_DPL;
 	configuration.DYNPD  =DYNPD_DPL_P0;
 #else
 	configuration.ENAA_Px=ENAA_Disable_All_Pipes;

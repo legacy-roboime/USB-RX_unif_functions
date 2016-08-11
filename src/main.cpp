@@ -81,13 +81,13 @@ int main(void)
   //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
 
-
   //TODO testar
 #ifdef USE_AUTOACK
-  uint8_t ack[]={'h','e','l','l','o'};
-  radio_ptr->FLUSH_TX();
-  radio.W_ACK_PAYLOAD(0,ack,5);
+  	 uint8_t ack[]={'h','e','l','l','o'};
+//     radio.FLUSH_TX();
+     radio.W_ACK_PAYLOAD(0,ack,5);
 #endif
+
   /* Infinite loop */
   while (1)
   {
@@ -115,6 +115,7 @@ uint8_t USB_receive_and_put(NRF* radio_ptr){
 
 	if(radio_ptr->RECEIVE(data)){
 		VCP_send_buffer(data,5);
+
 
 		//TODO: testar se ainda há pacotes para ler, COMO O MANUAL MANDA
 /*		if(radio_ptr->DATA_READY()){
