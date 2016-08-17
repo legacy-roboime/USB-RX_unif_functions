@@ -241,6 +241,7 @@ void SPI::ACTIVATE(void){//activate, para usar R_RX_PL_WID, W_ACK_PAYLOAD, W_TX_
  * @param pointer: pointer to the bytes to send
  * @param number; number of bytes to send
  */
+
 void SPI::W_ACK_PAYLOAD(uint8_t pipe,uint8_t* pointer,uint8_t number){
 	uint8_t w_ack_cmd = pipe;
 	w_ack_cmd |=((0b10101)<<3);

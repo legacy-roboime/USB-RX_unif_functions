@@ -81,17 +81,18 @@ int main(void)
   //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
 
-  //TODO testar
-#ifdef USE_AUTOACK
-  	 uint8_t ack[]={'h','e','l','l','o'};
-//     radio.FLUSH_TX();
-     radio.W_ACK_PAYLOAD(0,ack,5);
-#endif
-
   /* Infinite loop */
   while (1)
   {
-/*	  se IRQ=high,led laranja acende e verde fica apagado,
+	  //TODO testar
+	#ifdef USE_AUTOACK
+		radio.stop_listen();//in order to prevent the simultaneous usage of the SPI to write ack and read payload
+		uint8_t ack[]={'h','e','l','l','o'};
+		//radio.FLUSH_TX();
+		radio.W_ACK_PAYLOAD(0,ack,5);
+		radio.start_listen();//in order to prevent the simultaneous usage of the SPI to write ack and read payload
+	#endif
+	  /*	  se IRQ=high,led laranja acende e verde fica apagado,
 	  além disso, o led vermelho acende se e só se a interrupção estiver ativada
 	  se IRQ=low, apaga o led laranja e acende o verde*/
 	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5)){
