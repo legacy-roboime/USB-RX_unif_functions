@@ -52,6 +52,8 @@ __ALIGN_BEGIN USB_OTG_CORE_HANDLE  USB_OTG_dev __ALIGN_END;
 */
 
 uint8_t USB_receive_and_put(NRF* radio_ptr);
+void u8_to_binary(uint8_t number,uint8_t* ptr);
+int nbits(int dec);
 
 NRF* radio_ptr;
 
@@ -127,6 +129,24 @@ uint8_t USB_receive_and_put(NRF* radio_ptr){
 		return 0;
 	}
 }
+
+//representa os bits de number em ptr
+void u8_to_binary(uint8_t number,uint8_t* ptr){
+	for(int i=7;i>=0;i--){
+		ptr[i]='0'+(number%2);
+		number=number/2;
+	}
+}
+
+/*//número mínimo de bits para representar o decimal dec
+int nbits(int dec){
+	int n=1;
+	while((dec/2)>0){
+		dec=dec/2;
+		n++;
+	}
+	return n;
+}*/
 
 void EXTI0_IRQHandler(){
 	USB_receive_and_put(radio_ptr);
