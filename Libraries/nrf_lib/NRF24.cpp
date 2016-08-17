@@ -41,7 +41,7 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	 */
 
 	//enables the SYSCFG clock
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
+/*	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
 
 	GPIO_Clock_Cmd(NRF_IRQ_GPIO,ENABLE);
 	GPIO_InitTypeDef GPIO_IRQ_initstruct;
@@ -68,7 +68,7 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	NVIC_cfg.NVIC_IRQChannelSubPriority			= 0x0f;	//lower priority, can be preempted
 	NVIC_Init(&NVIC_cfg);
 
-	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));
+	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));*/
 
 	//MOSI, MISO, SCK GPIO configuration
 	GPIO_InitTypeDef GPIO_SPI_Pins_initstruct;
@@ -127,7 +127,7 @@ void NRF::begin(){
 	Delay_ms(1);
 
 	//Renault: escreveu 1 em 3 flags  que precisam ser  limpas no início (RX_DR,TX_DS,MAX_RT)
-	uint8_t status = 0b01110000;
+	uint8_t status = RX_DR_MASK|TX_DS_MASK|MAX_RT_MASK;
 	W_REGISTER(0x07,1,&status);
 
 	Delay_ms(2);//tempo de startup
@@ -329,30 +329,31 @@ uint8_t NRF::DATA_READY(void){
 uint8_t NRF::TRANSMITTED(void){
 	uint8_t tx_empty;
 	uint8_t tx_ds;
-#ifdef USE_AUTOACK
-	do{
-#endif
 
-		R_REGISTER(0x17,1,&tx_empty);
-		for (int i=0;i<0x1dc4;i++);
-		tx_empty &= TX_EMPTY_MASK;
 
-		R_REGISTER(0x07,1,&tx_ds);
-		for (int i=0;i<0x1dc4;i++);
-		tx_ds &= TX_DS_MASK;
 
-		//if(tx_ds || !tx_empty)
-		if(tx_ds)
-			return 1;
-#ifndef USE_AUTOACK
-		else
-			return 0;
-#endif
-#ifdef USE_AUTOACK
-	}while(!tx_ds);
-#endif
+
+	R_REGISTER(0x17,1,&tx_empty);
+	for (int i=0;i<0x1dc4;i++);
+	tx_empty &= TX_EMPTY_MASK;
+
+	R_REGISTER(0x07,1,&tx_ds);
+	for (int i=0;i<0x1dc4;i++);
+	tx_ds &= TX_DS_MASK;
+
+	//if(tx_ds || !tx_empty)
+	if(tx_ds)
+		return 1;
+
+	else
+		return 0;
+
+
+
+
 }
 
+//tenta a transmissão
 //data: ponteiro para os bytes a serem transmitidos; size: número de bytes a enviar
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::SEND(uint8_t* data, uint8_t size){
@@ -544,7 +545,7 @@ void NRF::TX_configure(){
 		configuration.ERX_Px=ERX_P0;
 		configuration.RETR_ARC_and_ARD=RETR_ARC_15_RETRANSMIT|RETR_ARD_wait_4000_us;//até 15 tentativas, 1 a cada 4ms
 		configuration.RX_ADDR_P0=configuration.TX_ADDR;//para permitir AutoACK
-		configuration.FEATURE=FEATURE_EN_ACK_PAY|FEATURE_EN_DPL|FEATURE_EN_DYN_ACK;
+		configuration.FEATURE=FEATURE_EN_ACK_PAY|FEATURE_EN_DPL;
 		configuration.DYNPD  =DYNPD_DPL_P0;
 	#else //se o AUTOACK NÃO estiver sendo usado
 		configuration.ENAA_Px=ENAA_Disable_All_Pipes;
