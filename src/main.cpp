@@ -103,7 +103,7 @@ int main(void)
 		radio.stop_listen();//in order to prevent the simultaneous usage of the SPI to write ack and read payload
 		uint8_t ack[]={'h','e','l','l','o'};
 		//radio.FLUSH_TX();
-		radio.W_ACK_PAYLOAD(0,ack,5);
+		radio.W_ACK_PAYLOAD(RX_Pipe_0,ack,5);
 		radio.start_listen();//in order to prevent the simultaneous usage of the SPI to write ack and read payload
 	#endif
 	  /*	  se IRQ=high,led laranja acende e verde fica apagado,
