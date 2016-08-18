@@ -396,27 +396,45 @@ void NRF::stop_listen(){
 	return;
 }
 
-//data: ponteiro para os bytes a serem transmitidos; size: número de bytes a enviar
-//retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
+/*
+ * Armazena em data a mensagem mais recente
+ * prende o programa aqui até receber algo
+ * data: ponteiro que armazenará os bytes recebidos;
+ * retorna 1 se o NRF24 recebeu alguma coisa, retorna 0 se ainda não conseguiu receber
+ */
 uint8_t NRF::RECEIVE(uint8_t* data){
 	//passa aqui
 
-	while(!DATA_READY());
-	//espera até receber algo
+	if(DATA_READY()){//verifica se recebeu algo
 
-	READ_RX_FIFO(data);
+		ASSERT_CE(RESET);//para evitar problemas (novas interrupções)
 
-	uint8_t status;
-	R_REGISTER(0x07,1,&status);
-	STD_ITER_DELAY
+		read_top_of_fifo:
+		READ_RX_FIFO(data);
 
-	//reseta a IRQ, conforme a product specification
-	status |= RX_DR_MASK;
-	W_REGISTER(0x07,1,&status);
-	STD_ITER_DELAY
+		uint8_t status,fifo_status;
+		R_REGISTER(STATUS_ADDRESS,1,&status);
+		STD_ITER_DELAY
 
-	return 1;
+		//com CE=LOW, reseta a IRQ, conforme a product specification
+		status |= RX_DR_MASK;
+		W_REGISTER(STATUS_ADDRESS,1,&status);
+		STD_ITER_DELAY
+
+		//verifica se há outros pacotes para ler, conforme a product specification
+		R_REGISTER(FIFO_STATUS_ADDRESS,1,&fifo_status);
+		STD_ITER_DELAY
+		if((fifo_status & RX_EMPTY_MASK)==0){
+			goto read_top_of_fifo;
+		}
+
+		return 1;
+	}
+	else{
+		return 0;
+	}
 }
+
 
 //lê a payload no topo da RX_FIFO
 //pointer: local aonde a mensagem será gravada

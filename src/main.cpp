@@ -51,7 +51,7 @@ __ALIGN_BEGIN USB_OTG_CORE_HANDLE  USB_OTG_dev __ALIGN_END;
 **===========================================================================
 */
 
-uint8_t USB_receive_and_put(NRF* radio_ptr);
+uint8_t USB_receive_and_put();
 
 void test_nRF();	//testa se a comunicação entre uC e nRF funciona
 void print_nRF();	//imprime no terminal todos os registradores do nRF24
@@ -88,12 +88,12 @@ int main(void)
   //inicialização do USB
   USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
 
-  Delay_s(20);
+/*  Delay_s(20);
   print_nRF();
   STM_EVAL_LEDOn(LED3);
   STM_EVAL_LEDOn(LED4);
   STM_EVAL_LEDOn(LED5);
-  STM_EVAL_LEDOn(LED6);
+  STM_EVAL_LEDOn(LED6);*/
 
   /* Infinite loop */
   while (1)
@@ -106,10 +106,12 @@ int main(void)
 		radio.W_ACK_PAYLOAD(RX_Pipe_0,ack,5);
 		radio.start_listen();//in order to prevent the simultaneous usage of the SPI to write ack and read payload
 	#endif
+	USB_receive_and_put();
+	print_nRF();
 	  /*	  se IRQ=high,led laranja acende e verde fica apagado,
 	  além disso, o led vermelho acende se e só se a interrupção estiver ativada
 	  se IRQ=low, apaga o led laranja e acende o verde*/
-	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5)){
+/*	  if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5)){
 		  STM_EVAL_LEDOn(LED3);
 		  STM_EVAL_LEDOff(LED4);
 		  if(EXTI_GetITStatus(EXTI_Line5)!=RESET)
@@ -120,22 +122,20 @@ int main(void)
 	  else{
 		  STM_EVAL_LEDOff(LED3);
 		  STM_EVAL_LEDOn(LED4);
-	  }
+	  }*/
   }
 }
 
-uint8_t USB_receive_and_put(NRF* radio_ptr){
+uint8_t USB_receive_and_put(){
 	static uint8_t data[]={0,0,0,0,0};
 	//passa por aqui
-
+	radio_ptr->start_listen();//para garantir CE=high
+	
 	if(radio_ptr->RECEIVE(data)){
 		VCP_send_buffer(data,5);
 
-
-		//TODO: testar se ainda há pacotes para ler, COMO O MANUAL MANDA
-/*		if(radio_ptr->DATA_READY()){
-			STM_EVAL_LEDOn(LED5);
-		}*/
+		//TODO: decidir voltar ou não a "ESCUTAR"
+		radio_ptr->start_listen();
 		return 1;
 	}
 	else{
@@ -232,35 +232,35 @@ int nbits(int dec){
 }*/
 
 void EXTI0_IRQHandler(){
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put();
 	EXTI_ClearITPendingBit(EXTI_Line0);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
 void EXTI1_IRQHandler(){
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put();
 	EXTI_ClearITPendingBit(EXTI_Line1);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
 void EXTI2_IRQHandler(){
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put();
 	EXTI_ClearITPendingBit(EXTI_Line2);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
 void EXTI3_IRQHandler(){
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put();
 	EXTI_ClearITPendingBit(EXTI_Line3);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
 }
 
 void EXTI4_IRQHandler(){
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put();
 	EXTI_ClearITPendingBit(EXTI_Line4);
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
 	return;
@@ -268,7 +268,7 @@ void EXTI4_IRQHandler(){
 
 void EXTI9_5_IRQHandler(){
 	//passa por aqui
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put();
 	//NÃO passa por aqui
 	//contém 1 na posição correspondente às linhas que têm IT para tratar
 	EXTI_ClearITPendingBit(EXTI_Line(radio_ptr->IRQ_Pin()));
@@ -277,7 +277,7 @@ void EXTI9_5_IRQHandler(){
 }
 
 void EXTI15_10_IRQHandler(){
-	USB_receive_and_put(radio_ptr);
+	USB_receive_and_put();
 	//contém 1 na posição correspondente às linhas que têm IT para tratar
 	EXTI_ClearITPendingBit(EXTI_Line(radio_ptr->IRQ_Pin()));
 	STM_EVAL_LEDToggle(LED6);//indicador de sucesso
