@@ -10,7 +10,8 @@
 
 //acessible registers of NRF
 class NRF_REGISTER_MAP{
-protected:
+//protected:
+public:
 	REGISTER CONFIG;
 	REGISTER EN_AA;
 	REGISTER EN_RXADDR;

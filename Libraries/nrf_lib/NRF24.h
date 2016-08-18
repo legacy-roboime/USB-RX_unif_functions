@@ -132,6 +132,7 @@ typedef enum{
 #define TX_EMPTY_MASK	0b00010000
 #define RX_DR_MASK 		0b01000000
 #define TX_DS_MASK		0b00100000
+#define MAX_RT_MASK		0b00010000
 #define RX_P_NO_MASK	0b00001110
 
 //faz toda a configuração do TX mode e do RX mode
