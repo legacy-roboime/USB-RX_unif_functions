@@ -163,7 +163,6 @@ typedef enum{
 #define DYNPD_ADDRESS		0x1c
 #define FEATURE_ADDRESS		0x1d
 
-
 //faz toda a configuração do TX mode e do RX mode
 typedef struct{
 	uint8_t channel; 			//determines the frequency in which the nRF42 will operate
@@ -222,6 +221,8 @@ public:
 	void W_ACK_PAYLOAD(uint8_t pipe,uint8_t* pointer,uint8_t number);
 	void FLUSH_TX();
 	void FLUSH_RX();
+	int W_REGISTER(uint8_t adress, uint8_t size,uint8_t* value) {return SPI::W_REGISTER(adress, size,value); };//WORKED! but SPI seems too much fast to NRF
+	int R_REGISTER(uint8_t adress, uint8_t size,uint8_t* pointer) {return SPI::R_REGISTER(adress, size, pointer); };//WORKED!
 	void RX_configure(config_Struct* pointer);
 	void TX_configure(config_Struct* pointer);
 	void RX_configure();
@@ -229,8 +230,6 @@ public:
 
 private:
 	//métodos
-	int W_REGISTER(uint8_t adress, uint8_t size,uint8_t* value) {return SPI::W_REGISTER(adress, size,value); };//WORKED! but SPI seems too much fast to NRF
-	int R_REGISTER(uint8_t adress, uint8_t size,uint8_t* pointer) {return SPI::R_REGISTER(adress, size, pointer); };//WORKED!
 	void RESET_ALL_REGISTERS(void);//WORKED!  but fails with read-only registers
 	void ASSERT_CE(int STATE);
 	void stdbyI_to_TX(uint8_t channel);

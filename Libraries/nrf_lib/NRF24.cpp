@@ -41,7 +41,8 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	 */
 
 	//enables the SYSCFG clock
-/*	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
+/*
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
 
 	GPIO_Clock_Cmd(NRF_IRQ_GPIO,ENABLE);
 	GPIO_InitTypeDef GPIO_IRQ_initstruct;
@@ -68,7 +69,8 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
 	NVIC_cfg.NVIC_IRQChannelSubPriority			= 0x0f;	//lower priority, can be preempted
 	NVIC_Init(&NVIC_cfg);
 
-	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));*/
+	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));
+*/
 
 	//MOSI, MISO, SCK GPIO configuration
 	GPIO_InitTypeDef GPIO_SPI_Pins_initstruct;
@@ -327,30 +329,26 @@ uint8_t NRF::DATA_READY(void){
 
 //retorna 1 se o NRF24 enviou alguma coisa(recebeu o ACK, caso esteja habilitado), retorna 0 se ainda não conseguiu enviar(ou não recebeu o ACK, caso esteja habilitado)
 uint8_t NRF::TRANSMITTED(void){
-	uint8_t tx_empty;
-	uint8_t tx_ds;
+	uint8_t fifo_status;
+	uint8_t status;
 
-
-
-
-	R_REGISTER(0x17,1,&tx_empty);
+	R_REGISTER(FIFO_STATUS_ADDRESS,1,&fifo_status);
 	for (int i=0;i<0x1dc4;i++);
-	tx_empty &= TX_EMPTY_MASK;
+	fifo_status &= TX_EMPTY_MASK;
 
-	R_REGISTER(0x07,1,&tx_ds);
+	R_REGISTER(STATUS_ADDRESS,1,&status);
 	for (int i=0;i<0x1dc4;i++);
-	tx_ds &= TX_DS_MASK;
 
-	//if(tx_ds || !tx_empty)
-	if(tx_ds)
+	//if((status & TX_DS_MASK) || !(fifo_status & TX_EMPTY_MASK))
+	if(status & TX_DS_MASK){
+		ASSERT_CE(RESET);//para evitar problemas (novas interrupções) e pq W_REGISTER() só pode ser chamada com CE=LOW
+		status |= TX_DS_MASK;//reseta a flag TX_DS
+		W_REGISTER(STATUS_ADDRESS,1,&status);
+		STD_ITER_DELAY
 		return 1;
-
+	}
 	else
 		return 0;
-
-
-
-
 }
 
 //tenta a transmissão
@@ -434,7 +432,6 @@ uint8_t NRF::RECEIVE(uint8_t* data){
 		return 0;
 	}
 }
-
 
 //lê a payload no topo da RX_FIFO
 //pointer: local aonde a mensagem será gravada
@@ -559,6 +556,7 @@ void NRF::TX_configure(){
 	configuration.RF_SETUP=RF_SETUP_Data_Rate_2Mbps;
 	configuration.channel=0x02;
 	configuration.TX_ADDR=ReceiverAddress;
+	configuration.payload_width_pipe_0=5;
 
 	#ifdef USE_AUTOACK
 		configuration.ENAA_Px=ENAA_P0;

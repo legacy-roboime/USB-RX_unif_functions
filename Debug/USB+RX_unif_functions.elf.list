@@ -23,19 +23,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   9 .ARM.attributes 00000030  00000000  00000000  0002019c  2**0
                   CONTENTS, READONLY
- 10 .debug_info   00014ab4  00000000  00000000  000201cc  2**0
+ 10 .debug_info   00014ad1  00000000  00000000  000201cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_abbrev 00003697  00000000  00000000  00034c80  2**0
+ 11 .debug_abbrev 0000367a  00000000  00000000  00034c9d  2**0
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_aranges 00000fa8  00000000  00000000  00038318  2**3
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_ranges 00000de0  00000000  00000000  000392c0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00006625  00000000  00000000  0003a0a0  2**0
+ 14 .debug_line   00006635  00000000  00000000  0003a0a0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    00005964  00000000  00000000  000406c5  2**0
+ 15 .debug_str    00005955  00000000  00000000  000406d5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .comment      0000007e  00000000  00000000  00046029  2**0
+ 16 .comment      0000007e  00000000  00000000  0004602a  2**0
                   CONTENTS, READONLY
  17 .debug_frame  000040fc  00000000  00000000  000460a8  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -14197,11 +14197,11 @@ NRF_REGISTER_MAP::NRF_REGISTER_MAP(){
  8004da2:	bf00      	nop
 
 08004da4 <_ZN3NRF10W_REGISTEREhhPh>:
-	void RX_configure();
-	void TX_configure();
-
-private:
-	//métodos
+	uint8_t RECEIVE(uint8_t* data);
+	uint8_t SEND(uint8_t* data, uint8_t size = 5);
+	void W_ACK_PAYLOAD(uint8_t pipe,uint8_t* pointer,uint8_t number);
+	void FLUSH_TX();
+	void FLUSH_RX();
 	int W_REGISTER(uint8_t adress, uint8_t size,uint8_t* value) {return SPI::W_REGISTER(adress, size,value); };//WORKED! but SPI seems too much fast to NRF
  8004da4:	b580      	push	{r7, lr}
  8004da6:	b084      	sub	sp, #16
@@ -14330,8 +14330,8 @@ NRF::NRF(GPIO_TypeDef* CE_GPIO,uint16_t CE_Pin,
  8004e7a:	4611      	mov	r1, r2
  8004e7c:	4618      	mov	r0, r3
  8004e7e:	f001 f85d 	bl	8005f3c <GPIO_Init>
-
-	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));*/
+	SYSCFG_EXTILineConfig(EXTI_PortSource(NRF_IRQ_GPIO),EXTI_PinSource(NRF_IRQ_Pin));
+*/
 
 	//MOSI, MISO, SCK GPIO configuration
 	GPIO_InitTypeDef GPIO_SPI_Pins_initstruct;
@@ -15444,7 +15444,6 @@ uint8_t NRF::RECEIVE(uint8_t* data){
  80054de:	bd90      	pop	{r4, r7, pc}
 
 080054e0 <_ZN3NRF12READ_RX_FIFOEPh>:
-
 
 //lê a payload no topo da RX_FIFO
 //pointer: local aonde a mensagem será gravada
